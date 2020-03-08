@@ -1,4 +1,4 @@
-package com.crimespotter.crimespotter;
+package com.crimespotter.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

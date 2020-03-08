@@ -1,4 +1,4 @@
-package com.crimespotter.crimespotter;
+package com.crimespotter.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
