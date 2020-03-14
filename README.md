@@ -8,7 +8,7 @@ You need Java 1.8 and a bash-like shell.
 
 Invoke the build at the root of the project
 
-####Invoke the build at the root of the project
+#### Invoke the build at the root of the project
 ----
     $ ./mvnw clean install
 ----
