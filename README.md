@@ -1,7 +1,7 @@
 # CrimeSpotter
 
 ### Building from Source
-You need Java 1.8 and a bash-like shell.
+You need Java 11 and a bash-like shell.
 
 
 ### Building
