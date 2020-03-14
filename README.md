@@ -1,7 +1,7 @@
 # CrimeSpotter
 
 [build]
-== Building from Source
+Building from Source
 
 You need Java 1.8 and a bash-like shell.
 
