@@ -1,4 +1,23 @@
 # CrimeSpotter
+### Installing MySQL
+First use homebrew to install:
+#### Brew installation
+----
+    $ brew install mysql
+----
+#### Run secure installation
+----
+    $ mysql_secure_installation
+----
+1. Would you like to setup VALIDATE PASSWORD component? No
+2. Set new password
+3. Disallow root login remotely? Yes
+4. Remove test database and access to it? Yes
+5. Reload privilege tables now? Yes
+
+Running into trouble?
+https://stackoverflow.com/questions/4359131/brew-install-mysql-on-macos/33924648#33924648
+- Follow this guide and remove all your mysql instances, re-install mysql and run the above configuration again.
 
 ### Building from Source
 You need Java 11 and a bash-like shell.
