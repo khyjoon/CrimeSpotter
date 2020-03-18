@@ -88,6 +88,7 @@ especially the UI.
 
 
 ## Troubleshooting
+#### Timezone issue
 java.sql.SQLException: The server timezone value 'UTC' is unrecognized or represents more than one timezone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc timezone value if you want to utilize timezone support.
 Run this in MySQL
 ----
