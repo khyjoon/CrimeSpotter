@@ -27,6 +27,9 @@ Personally I use Sequel Pro, you can install any other tool you like.
     Username: root
     Password: "your_password"
 
+#### Creating a a new Database
+On the top left drop down in sequel pro, click "Add a new database"
+- Create a new database with the name "CrimeSpotter" and set all the default options.
 
 
 ## Installing Spring Framework and Maven
@@ -82,3 +85,11 @@ to reload the app whenever you make any change.
 
 This is the recommended way to operate while you are developing the application,
 especially the UI.
+
+
+## Troubleshooting
+java.sql.SQLException: The server timezone value 'UTC' is unrecognized or represents more than one timezone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc timezone value if you want to utilize timezone support.
+Run this in MySQL
+----
+    SET GLOBAL time_zone = '+3:00';
+----
