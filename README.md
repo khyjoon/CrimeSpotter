@@ -1,5 +1,5 @@
 # CrimeSpotter
-### Installing MySQL
+## Installing MySQL
 First use homebrew to install:
 #### Brew installation
 ----
@@ -29,7 +29,7 @@ Personally I use Sequel Pro, you can install any other tool you like.
 
 
 
-### Installing Spring Framework and Maven
+## Installing Spring Framework and Maven
 You need Java 11 and a bash-like shell.
 
 
