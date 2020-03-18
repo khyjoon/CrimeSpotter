@@ -19,11 +19,11 @@ Running into trouble?
 https://stackoverflow.com/questions/4359131/brew-install-mysql-on-macos/33924648#33924648
 - Follow this guide and remove all your mysql instances, re-install mysql and run the above configuration again.
 
-### Building from Source
+### Installing Spring Framework and Maven
 You need Java 11 and a bash-like shell.
 
 
-### Building
+#### Building
 
 Invoke the build at the root of the project
 
