@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS Event (
     caused_injury CHAR(100),
     FOREIGN KEY(location_id) REFERENCES Location(location_id),
     FOREIGN KEY(c_id) REFERENCES Community(c_id)
-)
+);
 
 CREATE TABLE IF NOT EXISTS Crime (
     event_id INTEGER NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Crime (
     crime_type CHAR(100),
     PRIMARY KEY(event_id),
     FOREIGN KEY(event_id) REFERENCES Event(event_id)
-)
+);
 
 CREATE TABLE IF NOT EXISTS CarAccident(
     event_id INTEGER NOT NULL,
