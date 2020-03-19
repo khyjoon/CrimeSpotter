@@ -97,3 +97,21 @@ especially the UI.
 ----
     SET GLOBAL time_zone = '+3:00';
 ----
+
+### Sequel Pro Unexpectedly crashing
+Download one of the test builds
+https://sequelpro.com/test-builds
+
+Changed the encryption of the user's password by doing this
+
+Open the command line
+Login to mysql
+
+mysql -uroot -p
+
+Put mysql password
+
+Then run this command:
+ALTER USER 'yourusername'@'localhost' IDENTIFIED WITH mysql_native_password BY 'youpassword';
+
+Of course change [yourusername] and [yourpassword] to your own
