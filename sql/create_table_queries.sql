@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Event (
     location_id INTEGER NOT NULL,
     c_id INTEGER NOT NULL,
     time TIME,
-    tile CHAR(100),
+    title CHAR(100),
     severity INTEGER,
     caused_injury CHAR(100),
     FOREIGN KEY(location_id) REFERENCES Location(location_id),

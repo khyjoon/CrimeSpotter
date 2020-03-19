@@ -13,9 +13,9 @@ public class UserController {
 
     //# Register a new player
     @RequestMapping(method = RequestMethod.PUT, value = "/users")
-    public boolean addPlayer(@RequestParam("userName") String userName,
+    public boolean addPlayer(@RequestParam("user_name") String userName,
                              @RequestParam("password") String password,
-                             @RequestParam("password") String email,
+                             @RequestParam("user_email") String email,
                              @RequestParam("isAdmin") boolean isAdmin) {
         return userService.addUser(userName, password, email, isAdmin);
     }

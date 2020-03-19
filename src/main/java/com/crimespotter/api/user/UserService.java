@@ -12,7 +12,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public boolean addUser(String userName, String password, String email, boolean isAdmin) {
-        userRepository.addUser(userName, password, email, isAdmin);
+        userRepository.addUser(userName, password, email, isAdmin, false);
         return true;
     }
 

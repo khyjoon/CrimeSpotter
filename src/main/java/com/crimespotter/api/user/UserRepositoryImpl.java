@@ -14,11 +14,11 @@ public class UserRepositoryImpl implements UserRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public void addUser(String userName, String password, String email, boolean isAdmin) {
+    public void addUser(String user_name, String password, String user_email, boolean isAdmin, boolean isBanned) {
         String query =
-                "INSERT INTO user (userName, password, email, isAdmin)\n" +
-                        "VALUES (?,?,?,?)";
-        jdbcTemplate.update(query, userName, password, email, isAdmin);
+                "INSERT INTO user (user_name, password, user_email, isAdmin, isBanned)\n" +
+                        "VALUES (?,?,?,?,?)";
+        jdbcTemplate.update(query, user_name, password, user_email, isAdmin, isBanned);
     }
 
     @Override
