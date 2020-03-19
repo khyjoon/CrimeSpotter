@@ -86,6 +86,10 @@ to reload the app whenever you make any change.
 This is the recommended way to operate while you are developing the application,
 especially the UI.
 
+## Installing Postman
+https://www.postman.com/downloads/
+### What is Postman
+We can use postman to test our API endpoints. For example if you want to see what data is being returned at "localhost:8080/users", we can run a GET Request on that URL to see what data is returned.
 
 ## Troubleshooting
 ### Timezone issue
