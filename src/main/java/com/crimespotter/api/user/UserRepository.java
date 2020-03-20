@@ -5,13 +5,11 @@ import com.crimespotter.api.user.model.userinfo.User;
 import java.util.List;
 
 interface UserRepository {
-    void addUser(String userName, String password, String email, boolean isAdmin);
+    void addUser(String user_id, String user_name, String password, String email, boolean isAdmin, boolean isBanned);
 
     List<User> getAllUsers();
 
-    void userPostComment(String userID, String comment);
-
-    void userCreatePost();
+    void addCommunity(String c_name);
 
     void deleteUser(String userId);
 }
