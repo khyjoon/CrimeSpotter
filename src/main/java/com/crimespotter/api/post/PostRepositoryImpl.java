@@ -16,7 +16,7 @@ public class PostRepositoryImpl implements PostRepository {
     @Override
     public void addPost(String post_id, String user_id, String event_id, boolean isActive) {
         String query =
-                "INSERT INTO Post (post_id, user_id, event_id, time, isActive)\n" +
+                "INSERT INTO Post (post_id, user_id, event_id, post_time, isActive)\n" +
                         "VALUES (?,?,?,CURRENT_TIME,?)";
         jdbcTemplate.update(query, post_id, user_id, event_id, isActive);
     }

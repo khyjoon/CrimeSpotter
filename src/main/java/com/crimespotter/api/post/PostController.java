@@ -1,7 +1,6 @@
 package com.crimespotter.api.post;
 
 import com.crimespotter.api.post.model.post.Post;
-import com.crimespotter.api.user.model.userinfo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
