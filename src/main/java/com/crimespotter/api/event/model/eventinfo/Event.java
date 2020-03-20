@@ -3,27 +3,27 @@ package com.crimespotter.api.event.model.eventinfo;
 import java.sql.Time;
 
 public class Event {
-    private Integer eventId;
-    private Integer locationId;
+    private String eventId;
+    private String locationId;
     private Integer communityId;
     private Time time;
     private String title;
     private Integer severity;
     private boolean causedInjury;
 
-    public Integer getEventId() {
+    public String getEventId() {
         return eventId;
     }
 
-    public void setEventId(Integer eventId) {
+    public void setEventId(String eventId) {
         this.eventId = eventId;
     }
 
-    public Integer getLocationId() {
+    public String getLocationId() {
         return locationId;
     }
 
-    public void setLocationId(Integer locationId) {
+    public void setLocationId(String locationId) {
         this.locationId = locationId;
     }
 

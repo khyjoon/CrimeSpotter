@@ -9,7 +9,7 @@ public class CarDetailsMapper implements RowMapper<CarDetails> {
     @Override
     public CarDetails mapRow(ResultSet resultSet, int i) throws SQLException {
         CarDetails carDetails = new CarDetails();
-        carDetails.setEventId(resultSet.getInt("event_id"));
+        carDetails.setEventId(resultSet.getString("event_id"));
         carDetails.setLicense(resultSet.getString("license"));
         carDetails.setMake(resultSet.getString("make"));
         carDetails.setModel(resultSet.getString("model"));

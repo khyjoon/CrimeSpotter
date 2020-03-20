@@ -10,7 +10,7 @@ public class CrimeMapper implements RowMapper<Crime> {
     @Override
     public Crime mapRow(ResultSet resultSet, int i) throws SQLException {
         Crime crime = new Crime();
-        crime.setEventId(resultSet.getInt("event_id"));
+        crime.setEventId(resultSet.getString("event_id"));
         crime.setSuspectDesription(resultSet.getString("suspect_description"));
         crime.setCrimeType(resultSet.getString("crime_type"));
         return crime;

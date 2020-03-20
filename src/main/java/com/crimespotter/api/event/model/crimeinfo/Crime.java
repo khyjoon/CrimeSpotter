@@ -1,15 +1,15 @@
 package com.crimespotter.api.event.model.crimeinfo;
 
 public class Crime {
-    private Integer eventId;
+    private String eventId;
     private String suspectDesription;
     private String crimeType;
 
-    public Integer getEventId() {
+    public String getEventId() {
         return eventId;
     }
 
-    public void setEventId(Integer eventId) {
+    public void setEventId(String eventId) {
         this.eventId = eventId;
     }
 

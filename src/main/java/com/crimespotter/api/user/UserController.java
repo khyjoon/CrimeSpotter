@@ -11,7 +11,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //# Register a new player
     @RequestMapping(method = RequestMethod.PUT, value = "/users")
     public boolean addPlayer(@RequestParam("user_name") String userName,
                              @RequestParam("password") String password,
@@ -19,6 +18,12 @@ public class UserController {
                              @RequestParam("isAdmin") boolean isAdmin) {
         return userService.addUser(userName, password, email, isAdmin);
     }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/community")
+    public boolean addPlayer(@RequestParam("community_name") String community_name) {
+        return userService.addCommunity(community_name);
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public List<User> getPlayersByName() {

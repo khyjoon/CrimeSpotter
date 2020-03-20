@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -12,7 +13,14 @@ public class UserService {
     private UserRepository userRepository;
 
     public boolean addUser(String userName, String password, String email, boolean isAdmin) {
-        userRepository.addUser(userName, password, email, isAdmin, false);
+        UUID uuid = UUID.randomUUID();
+        String user_id = uuid.toString();
+        userRepository.addUser(user_id, userName, password, email, isAdmin, false);
+        return true;
+    }
+
+    public boolean addCommunity(String communityName) {
+        userRepository.addCommunity(communityName);
         return true;
     }
 

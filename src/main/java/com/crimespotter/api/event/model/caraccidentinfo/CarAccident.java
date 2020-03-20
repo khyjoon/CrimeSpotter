@@ -1,15 +1,15 @@
 package com.crimespotter.api.event.model.caraccidentinfo;
 
 public class CarAccident {
-    private Integer eventId;
+    private String eventId;
     private String collisionType;
     private Integer pedestriansInvolved;
 
-    public Integer getEventId() {
+    public String getEventId() {
         return eventId;
     }
 
-    public void setEventId(Integer eventId) {
+    public void setEventId(String eventId) {
         this.eventId = eventId;
     }
 

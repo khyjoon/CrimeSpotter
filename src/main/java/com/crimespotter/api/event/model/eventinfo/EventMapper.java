@@ -9,8 +9,8 @@ public class EventMapper implements RowMapper<Event> {
     @Override
     public Event mapRow(ResultSet resultSet, int i) throws SQLException {
         Event event = new Event();
-        event.setEventId(resultSet.getInt("event_id"));
-        event.setLocationId(resultSet.getInt("location_id"));
+        event.setEventId(resultSet.getString("event_id"));
+        event.setLocationId(resultSet.getString("location_id"));
         event.setCommunityId(resultSet.getInt("c_id"));
         event.setTime(resultSet.getTime("time"));
         event.setTitle(resultSet.getString("title"));
