@@ -119,3 +119,6 @@ Then run this command:
 ALTER USER 'yourusername'@'localhost' IDENTIFIED WITH mysql_native_password BY 'youpassword';
 
 Of course change [yourusername] and [yourpassword] to your own
+
+### Unable to connect to sequel pro with your credentials
+https://stackoverflow.com/a/51180898
