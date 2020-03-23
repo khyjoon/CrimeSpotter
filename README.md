@@ -16,7 +16,7 @@ First use homebrew to install:
 5. Reload privilege tables now? Yes
 
 Running into trouble?
-https://stackoverflow.com/questions/4359131/brew-install-mysql-on-macos/33924648#33924648
+https://stackoverflow.com/questions/4359131/brew-install-mysql-on-macos/20983018#20983018
 - Follow this guide and remove all your mysql instances, re-install mysql and run the above configuration again.
 
 #### Installing the Database Management Application
@@ -119,3 +119,6 @@ Then run this command:
 ALTER USER 'yourusername'@'localhost' IDENTIFIED WITH mysql_native_password BY 'youpassword';
 
 Of course change [yourusername] and [yourpassword] to your own
+
+### Unable to connect to sequel pro with your credentials
+https://stackoverflow.com/a/51180898
