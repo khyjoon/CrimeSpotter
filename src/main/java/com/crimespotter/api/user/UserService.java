@@ -19,6 +19,11 @@ public class UserService {
         return true;
     }
 
+    public boolean addUserToCommunity(String c_id, String user_id) {
+        userRepository.addUserToComunity(c_id, user_id);
+        return true;
+    }
+
     public boolean addCommunity(String communityName) {
         userRepository.addCommunity(communityName);
         return true;

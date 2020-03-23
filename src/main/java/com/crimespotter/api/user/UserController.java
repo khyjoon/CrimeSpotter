@@ -24,6 +24,12 @@ public class UserController {
         return userService.addCommunity(community_name);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/usercommunity")
+    public boolean addCommunity(@RequestParam("user_id") String user_id,
+                                @RequestParam("c_id") String c_id) {
+        return userService.addUserToCommunity(c_id, user_id);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public List<User> getUsersByName() {
         return userService.getAllUsers();

@@ -16,9 +16,9 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void addUser(String user_id, String user_name, String password, String user_email, boolean isAdmin, boolean isBanned) {
         String query =
-                "INSERT INTO user (user_id, user_name, password, user_email, isAdmin, isBanned)\n" +
+                "INSERT INTO User (user_id, password, user_name, user_email, isBanned, isAdmin)\n" +
                         "VALUES (?,?,?,?,?,?)";
-        jdbcTemplate.update(query, user_id, user_name, password, user_email, isAdmin, isBanned);
+        jdbcTemplate.update(query, user_id, password, user_name, user_email, isBanned, isAdmin);
     }
 
     @Override
@@ -27,6 +27,14 @@ public class UserRepositoryImpl implements UserRepository {
                 "INSERT INTO Community (c_name)\n" +
                         "VALUES (?)";
         jdbcTemplate.update(query, c_name);
+    }
+
+    @Override
+    public void addUserToComunity(String c_id, String user_id) {
+        String query =
+                "INSERT INTO UserCommunity (user_id, c_id)\n" +
+                        "VALUES (?,?)";
+        jdbcTemplate.update(query, user_id, c_id);
     }
 
     @Override

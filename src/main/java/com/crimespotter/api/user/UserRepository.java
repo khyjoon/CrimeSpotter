@@ -11,5 +11,7 @@ interface UserRepository {
 
     void addCommunity(String c_name);
 
+    void addUserToComunity(String c_id, String user_id);
+
     void deleteUser(String userId);
 }
