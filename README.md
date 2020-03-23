@@ -26,6 +26,11 @@ Personally I use Sequel Pro, you can install any other tool you like.
     Host: 127.0.0.1
     Username: root
     Password: "your_password"
+    
+#### Connect to the main database with
+    Host: crimespotter-dev.c2ueaubcx5ys.us-east-2.rds.amazonaws.com
+    Username: admin
+    Password: crimespotter
 
 #### Creating a a new Database
 On the top left drop down in sequel pro, click "Add a new database"
