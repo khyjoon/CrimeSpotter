@@ -1,18 +1,18 @@
 package com.crimespotter.api.user.model.userinfo;
 
 public class User {
-    private Integer userId;
+    private String userId;
     private String userName;
     private String password;
     private String email;
     private boolean isBanned;
     private boolean isAdmin;
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

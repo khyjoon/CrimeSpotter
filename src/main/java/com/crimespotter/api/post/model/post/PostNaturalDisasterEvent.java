@@ -1,8 +1,6 @@
-package com.crimespotter.api.event.model.naturaldisasterinfo;
+package com.crimespotter.api.post.model.post;
 
-import com.crimespotter.api.event.model.eventinfo.Event;
-
-public class NaturalDisaster extends Event {
+public class PostNaturalDisasterEvent extends PostEvent {
     private String type;
     private Integer magnitude;
 

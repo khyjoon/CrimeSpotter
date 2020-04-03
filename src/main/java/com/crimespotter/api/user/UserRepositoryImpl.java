@@ -1,5 +1,7 @@
 package com.crimespotter.api.user;
 
+import com.crimespotter.api.user.model.community.Community;
+import com.crimespotter.api.user.model.community.CommunityMapper;
 import com.crimespotter.api.user.model.userinfo.User;
 import com.crimespotter.api.user.model.userinfo.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +16,20 @@ public class UserRepositoryImpl implements UserRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public void addUser(String user_id, String user_name, String password, String user_email, boolean isAdmin, boolean isBanned) {
+    public List<User> addUser(String user_id, String user_name, String password, String user_email, boolean isAdmin, boolean isBanned) {
         String query =
                 "INSERT INTO User (user_id, password, user_name, user_email, isBanned, isAdmin)\n" +
                         "VALUES (?,?,?,?,?,?)";
         jdbcTemplate.update(query, user_id, password, user_name, user_email, isBanned, isAdmin);
+        String readQuery =
+                "SELECT *\n" +
+                        "FROM User\n" +
+                        "WHERE user_id = ?";
+        List<User> user = jdbcTemplate.query(readQuery, new UserMapper(), user_id);
+        return user;
     }
 
+    // this is the add community function
     @Override
     public void addCommunity(String c_name) {
         String query =
@@ -30,7 +39,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void addUserToComunity(String c_id, String user_id) {
+    public void addUserToCommunity(String c_id, String user_id) {
         String query =
                 "INSERT INTO UserCommunity (user_id, c_id)\n" +
                         "VALUES (?,?)";
@@ -38,10 +47,19 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public List<User> updateUserName(String currUsername, String newUsername) {
+        String updateQuery = "UPDATE User\n" +
+                                    "SET user_name = ?\n" +
+                                        "WHERE user_name = ?;";
+        jdbcTemplate.update(updateQuery, currUsername, newUsername);
+        return getUserByUserName(newUsername);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         String readQuery =
                 "SELECT *\n" +
-                        "FROM user\n" +
+                        "FROM User\n" +
                         "ORDER BY user_id DESC";
 
         List<User> users = jdbcTemplate.query(readQuery, new UserMapper());
@@ -49,10 +67,51 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void deleteUser(String userId) {
+    public boolean removeUser(String userId) {
         String deleteQuery =
-                "DELETE FROM user\n" +
+                "DELETE FROM User\n" +
                         "WHERE user_id = ?";
         jdbcTemplate.update(deleteQuery, userId);
+        return true;
+    }
+
+    @Override
+    public List<User> getUserByID(String userID) {
+        String readQuery =
+                "SELECT *\n" +
+                        "FROM User\n" +
+                        "WHERE user_id = ?";
+        List<User> user = jdbcTemplate.query(readQuery, new UserMapper(), userID);
+        return user;
+    }
+
+    @Override
+    public List<User> getUserByUserPass(String userName, String password) {
+        String readQuery =
+                "SELECT *\n" +
+                        "FROM User\n" +
+                        "WHERE user_name = ? AND password = ?";
+        List<User> user = jdbcTemplate.query(readQuery, new UserMapper(), userName, password);
+        return user;
+    }
+
+    @Override
+    public List<User> getUserByUserName(String userName) {
+        String readQuery =
+                "SELECT *\n" +
+                        "FROM User\n" +
+                        "WHERE user_name = ?";
+        List<User> user = jdbcTemplate.query(readQuery, new UserMapper(), userName);
+        return user;
+    }
+
+    @Override
+    public List<Community> getAllCommunities() {
+        String readQuery =
+                "SELECT *\n" +
+                        "FROM Community\n" +
+                        "ORDER BY c_id ASC";
+        List<Community> communities = jdbcTemplate.query(readQuery, new CommunityMapper());
+        return communities;
     }
 }
