@@ -60,4 +60,5 @@ public class UserController {
     public List<Community> getAllCommunities() {
         return userService.getAllCommunities();
     }
+
 }

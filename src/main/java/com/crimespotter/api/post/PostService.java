@@ -2,6 +2,7 @@ package com.crimespotter.api.post;
 
 import com.crimespotter.api.post.model.comment.Comment;
 import com.crimespotter.api.post.model.post.Post;
+import com.crimespotter.api.post.model.post.PostCommunity;
 import com.crimespotter.api.post.model.post.PostEvent;
 import com.crimespotter.api.user.model.userinfo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,9 @@ public class PostService {
 
     public Integer getTotalNumberOfPosts() {
         return postRepository.getTotalNumberOfPosts();
+    }
+
+    public List<PostCommunity> getTotalPostsInCommunity() {
+        return postRepository.getTotalPostsInEachCommunity();
     }
 }

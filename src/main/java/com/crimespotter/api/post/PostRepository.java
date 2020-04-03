@@ -3,6 +3,7 @@ package com.crimespotter.api.post;
 import com.crimespotter.api.event.model.eventinfo.Event;
 import com.crimespotter.api.post.model.comment.Comment;
 import com.crimespotter.api.post.model.post.Post;
+import com.crimespotter.api.post.model.post.PostCommunity;
 import com.crimespotter.api.post.model.post.PostEvent;
 
 import java.util.List;
@@ -21,4 +22,6 @@ interface PostRepository {
     List<PostEvent> getPostInfoByPostId(List<String> postId);
 
     Integer getTotalNumberOfPosts();
+
+    List<PostCommunity> getTotalPostsInEachCommunity();
 }

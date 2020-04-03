@@ -7,10 +7,7 @@ import com.crimespotter.api.event.model.eventinfo.EventMapper;
 import com.crimespotter.api.event.model.naturaldisasterinfo.NaturalDisasterMapper;
 import com.crimespotter.api.post.model.comment.Comment;
 import com.crimespotter.api.post.model.comment.CommentMapper;
-import com.crimespotter.api.post.model.post.Post;
-import com.crimespotter.api.post.model.post.PostEvent;
-import com.crimespotter.api.post.model.post.PostEventMapper;
-import com.crimespotter.api.post.model.post.PostMapper;
+import com.crimespotter.api.post.model.post.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -110,6 +107,19 @@ public class PostRepositoryImpl implements PostRepository {
                 "SELECT COUNT(post_id)\n" +
                         "FROM Posts\n";
         Integer numPosts = jdbcTemplate.queryForObject(readQuery, Integer.class);
+        return numPosts;
+    }
+
+    @Override
+    public List<PostCommunity> getTotalPostsInEachCommunity() {
+        String readQuery =
+                "SELECT COUNT(post_id) as total_posts, c.c_name\n" +
+                        "FROM Post p\n" +
+                                "JOIN Event e ON p.event_id = e.event_id\n" +
+                                        "JOIN Community c ON c.c_id = e.c_id\n" +
+                                                "GROUP BY c.c_name\n" +
+                                                        "ORDER BY COUNT(post_id) DESC;";
+        List<PostCommunity> numPosts = jdbcTemplate.query(readQuery, new PostCommunityMapper());
         return numPosts;
     }
 }
