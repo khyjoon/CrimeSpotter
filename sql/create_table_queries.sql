@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS Event (
     event_id CHAR(36) PRIMARY KEY,
     location_id CHAR(36) NOT NULL,
     c_id INTEGER NOT NULL,
-    time TIME,
+    time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     title CHAR(100),
     severity INTEGER,
     caused_injury CHAR(100),
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS Post(
     post_id CHAR(36) PRIMARY KEY,
     user_id CHAR(36) NOT NULL,
     event_id CHAR(36) NOT NULL,
-    post_time TIME,
+    post_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     isActive BIT,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (event_id) REFERENCES Event(event_id),
@@ -92,8 +92,7 @@ CREATE TABLE IF NOT EXISTS UserPostComment(
     user_id CHAR(36),
     post_id CHAR(36),
     content TEXT,
-    time TIME,
-    UNIQUE (time),
+    time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id)
         REFERENCES User(user_id)
         ON DELETE SET NULL
