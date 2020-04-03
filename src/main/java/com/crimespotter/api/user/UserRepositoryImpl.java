@@ -21,6 +21,7 @@ public class UserRepositoryImpl implements UserRepository {
         jdbcTemplate.update(query, user_id, password, user_name, user_email, isBanned, isAdmin);
     }
 
+    // this is the add community function
     @Override
     public void addCommunity(String c_name) {
         String query =
