@@ -39,11 +39,20 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void addUserToComunity(String c_id, String user_id) {
+    public void addUserToCommunity(String c_id, String user_id) {
         String query =
                 "INSERT INTO UserCommunity (user_id, c_id)\n" +
                         "VALUES (?,?)";
         jdbcTemplate.update(query, user_id, c_id);
+    }
+
+    @Override
+    public List<User> updateUserName(String currUsername, String newUsername) {
+        String updateQuery = "UPDATE User\n" +
+                                    "SET user_name = ?\n" +
+                                        "WHERE user_name = ?;";
+        jdbcTemplate.update(updateQuery, currUsername, newUsername);
+        return getUserByUserName(newUsername);
     }
 
     @Override
@@ -58,11 +67,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void deleteUser(String userId) {
+    public boolean removeUser(String userId) {
         String deleteQuery =
                 "DELETE FROM User\n" +
                         "WHERE user_id = ?";
         jdbcTemplate.update(deleteQuery, userId);
+        return true;
     }
 
     @Override
@@ -82,6 +92,16 @@ public class UserRepositoryImpl implements UserRepository {
                         "FROM User\n" +
                         "WHERE user_name = ? AND password = ?";
         List<User> user = jdbcTemplate.query(readQuery, new UserMapper(), userName, password);
+        return user;
+    }
+
+    @Override
+    public List<User> getUserByUserName(String userName) {
+        String readQuery =
+                "SELECT *\n" +
+                        "FROM User\n" +
+                        "WHERE user_name = ?";
+        List<User> user = jdbcTemplate.query(readQuery, new UserMapper(), userName);
         return user;
     }
 

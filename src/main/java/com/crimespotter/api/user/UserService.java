@@ -23,8 +23,12 @@ public class UserService {
     }
 
     public boolean addUserToCommunity(String c_id, String user_id) {
-        userRepository.addUserToComunity(c_id, user_id);
+        userRepository.addUserToCommunity(c_id, user_id);
         return true;
+    }
+
+    public List<User> updateUserName(String currUserName, String newUserName) {
+        return userRepository.updateUserName(currUserName, newUserName);
     }
 
     public boolean addCommunity(String communityName) {
@@ -32,8 +36,8 @@ public class UserService {
         return true;
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.getAllUsers();
+    public boolean removeUser(String userId) {
+        return userRepository.removeUser(userId);
     }
 
     public List<User> getUserByID(String userID) {

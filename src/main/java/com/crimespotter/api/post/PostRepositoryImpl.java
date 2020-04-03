@@ -103,4 +103,13 @@ public class PostRepositoryImpl implements PostRepository {
         List<PostEvent> naturalDisasterPostEventList = jdbcTemplate.query(naturalDisasterPostEventQuery,  postId.toArray(), new PostEventMapper());
         return Stream.of(crimePostEventList,carAccidentPostEventList,naturalDisasterPostEventList).flatMap(Collection::stream).collect(Collectors.toList());
     }
+
+    @Override
+    public Integer getTotalNumberOfPosts() {
+        String readQuery =
+                "SELECT COUNT(post_id)\n" +
+                        "FROM Posts\n";
+        Integer numPosts = jdbcTemplate.queryForObject(readQuery, Integer.class);
+        return numPosts;
+    }
 }

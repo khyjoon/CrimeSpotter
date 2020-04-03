@@ -13,12 +13,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/users")
+    @RequestMapping(method = RequestMethod.POST, value = "/users")
     public List<User> addUser(@RequestParam("user_name") String userName,
                              @RequestParam("password") String password,
                              @RequestParam("user_email") String email,
                              @RequestParam("isAdmin") boolean isAdmin) {
         return userService.addUser(userName, password, email, isAdmin);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/users")
+    public List<User> updateUsername(@RequestParam("old_user_name") String currUsername,
+                                     @RequestParam("new_user_name") String newUsername) {
+        return userService.updateUserName(currUsername, newUsername);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/users")
+    public boolean removeUser(@RequestParam("userId") String userId) {
+        return userService.removeUser(userId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/community")
@@ -49,6 +60,4 @@ public class UserController {
     public List<Community> getAllCommunities() {
         return userService.getAllCommunities();
     }
-
-
 }

@@ -41,4 +41,8 @@ public class PostService {
     public List<PostEvent> getAllPostInfoByUserId(String userId) {
         return postRepository.getPostsInfoByUserId(userId);
     }
+
+    public Integer getTotalNumberOfPosts() {
+        return postRepository.getTotalNumberOfPosts();
+    }
 }

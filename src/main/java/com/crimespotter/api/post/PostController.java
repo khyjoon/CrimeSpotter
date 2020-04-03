@@ -34,4 +34,9 @@ public class PostController {
             return postService.getPostInfoByPostId("");
         }
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/post/total")
+    public Integer getTotalNumberOfPosts() {
+        return postService.getTotalNumberOfPosts();
+    }
 }
