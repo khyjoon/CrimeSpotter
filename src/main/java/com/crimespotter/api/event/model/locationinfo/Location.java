@@ -1,15 +1,17 @@
 package com.crimespotter.api.event.model.locationinfo;
 
+import com.crimespotter.api.event.model.eventinfo.Event;
+
 public class Location {
-    private Integer locationId;
+    private String locationId;
     private Float latitude;
     private Float longitude;
 
-    public Integer getLocationId() {
+    public String getLocationId() {
         return locationId;
     }
 
-    public void setLocationId(Integer locationId) {
+    public void setLocationId(String locationId) {
         this.locationId = locationId;
     }
 

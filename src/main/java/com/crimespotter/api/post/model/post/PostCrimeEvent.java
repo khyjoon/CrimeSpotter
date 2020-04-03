@@ -1,8 +1,8 @@
-package com.crimespotter.api.event.model.crimeinfo;
+package com.crimespotter.api.post.model.post;
 
-import com.crimespotter.api.event.model.eventinfo.Event;
+import com.crimespotter.api.event.model.crimeinfo.Crime;
 
-public class Crime extends Event {
+public class PostCrimeEvent extends PostEvent {
     private String suspectDesription;
     private String crimeType;
 

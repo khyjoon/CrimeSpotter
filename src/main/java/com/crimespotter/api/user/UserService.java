@@ -1,8 +1,12 @@
 package com.crimespotter.api.user;
 
+import com.crimespotter.api.user.model.community.Community;
 import com.crimespotter.api.user.model.userinfo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,11 +16,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public boolean addUser(String userName, String password, String email, boolean isAdmin) {
+    public List<User> addUser(String userName, String password, String email, boolean isAdmin) {
         UUID uuid = UUID.randomUUID();
         String user_id = uuid.toString();
-        userRepository.addUser(user_id, userName, password, email, isAdmin, false);
-        return true;
+        return userRepository.addUser(user_id, userName, password, email, isAdmin, false);
     }
 
     public boolean addUserToCommunity(String c_id, String user_id) {
@@ -31,5 +34,18 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.getAllUsers();
+    }
+
+    public List<User> getUserByID(String userID) {
+        return userRepository.getUserByID(userID);
+    }
+
+    public List<User> getUserByUserPass(String userName,
+                                        String password) {
+        return userRepository.getUserByUserPass(userName, password);
+    }
+
+    public List<Community> getAllCommunities() {
+        return userRepository.getAllCommunities();
     }
 }

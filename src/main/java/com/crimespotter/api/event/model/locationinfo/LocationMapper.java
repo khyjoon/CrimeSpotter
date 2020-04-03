@@ -10,7 +10,7 @@ public class LocationMapper implements RowMapper<Location> {
     @Override
     public Location mapRow(ResultSet resultSet, int i) throws SQLException {
         Location location = new Location();
-        location.setLocationId(resultSet.getInt("location_id"));
+        location.setLocationId(resultSet.getString("location_id"));
         location.setLatitude(resultSet.getFloat("latitude"));
         location.setLongitude(resultSet.getFloat("longitude"));
         return location;
