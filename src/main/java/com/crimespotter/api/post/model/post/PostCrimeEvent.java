@@ -5,6 +5,15 @@ import com.crimespotter.api.event.model.crimeinfo.Crime;
 public class PostCrimeEvent extends PostEvent {
     private String suspectDesription;
     private String crimeType;
+    private String eventType;
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String type) {
+        this.eventType = type;
+    }
 
     public String getSuspectDesription() {
         return suspectDesription;

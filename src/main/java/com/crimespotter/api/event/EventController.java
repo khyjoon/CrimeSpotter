@@ -62,7 +62,7 @@ public class EventController {
         return eventService.addCarAccident(locationId, communityId, title, severity, causedInjury, collisionType, pedestriansInvolved, license, make, model, colour);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/event")
+    @RequestMapping(method = RequestMethod.GET, value = "/event")
     public List<Event> getAllEventsId(@RequestParam(value="community_id",required=false) Integer communityId,
                                  @RequestParam(value="event_id",required=false) String eventId) {
         if (communityId != null) {

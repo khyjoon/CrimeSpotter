@@ -21,6 +21,8 @@ interface PostRepository {
 
     List<PostEvent> getPostInfoByPostId(List<String> postId);
 
+    List<PostEvent> getPostInfoByCommunityId(List<String> communityId);
+
     Integer getTotalNumberOfPosts();
 
     List<PostCommunity> getTotalPostsInEachCommunity();

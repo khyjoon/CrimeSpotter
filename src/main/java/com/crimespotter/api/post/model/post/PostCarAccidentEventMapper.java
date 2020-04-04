@@ -1,17 +1,13 @@
 package com.crimespotter.api.post.model.post;
 
-import com.crimespotter.api.event.model.eventinfo.Event;
-import com.crimespotter.api.event.model.eventinfo.EventMapper;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PostEventMapper implements RowMapper<PostEvent> {
-
+public class PostCarAccidentEventMapper extends PostEventMapper {
     @Override
-    public PostEvent mapRow(ResultSet resultSet, int i) throws SQLException {
-        PostEvent postEvent = new PostEvent();
+    public PostCarAccidentEvent mapRow(ResultSet resultSet, int i) throws SQLException {
+        PostCarAccidentEvent postEvent = new PostCarAccidentEvent();
+        postEvent.setEventType("car_accident");
         postEvent.setPostId(resultSet.getString("post_id"));
         postEvent.setEventId(resultSet.getString("event_id"));
         postEvent.setUserId(resultSet.getString("user_id"));
@@ -23,7 +19,8 @@ public class PostEventMapper implements RowMapper<PostEvent> {
         postEvent.setTitle(resultSet.getString("title"));
         postEvent.setSeverity(resultSet.getInt("severity"));
         postEvent.setCausedInjury(resultSet.getBoolean("caused_injury"));
-
+        postEvent.setCollisionType(resultSet.getString("collision_type"));
+        postEvent.setPedestriansInvolved(resultSet.getInt("pedestrians_involved"));
         return postEvent;
     }
 }

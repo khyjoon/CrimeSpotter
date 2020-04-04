@@ -64,7 +64,7 @@ public class PostRepositoryImpl implements PostRepository {
     @Override
     public List<PostEvent> getPostsInfoByUserId(String userId) {
         String readQuery =
-                "SELECT post_id\n" +
+                "SELECT *\n" +
                         "FROM Post\n" +
                                 "WHERE user_id = ?";
 
@@ -81,7 +81,7 @@ public class PostRepositoryImpl implements PostRepository {
                                 "JOIN Event e ON e.event_id = p.event_id\n" +
                                         "JOIN Crime c ON c.event_id = p.event_id\n" +
                                                 "WHERE p.post_id IN (?);";
-        List<PostEvent> crimePostEventList = jdbcTemplate.query(crimePostEventQuery, postId.toArray(), new PostEventMapper());
+        List<PostEvent> crimePostEventList = jdbcTemplate.query(crimePostEventQuery, postId.toArray(), new PostCrimeEventMapper());
 
         String carAccidentPostEventQuery =
                 "SELECT *\n" +
@@ -89,7 +89,7 @@ public class PostRepositoryImpl implements PostRepository {
                                 "JOIN Event e ON e.event_id = p.event_id\n" +
                                         "JOIN CarAccident ca ON ca.event_id = p.event_id\n" +
                                                 "WHERE p.post_id IN (?);";
-        List<PostEvent> carAccidentPostEventList = jdbcTemplate.query(carAccidentPostEventQuery, postId.toArray(), new PostEventMapper());
+        List<PostEvent> carAccidentPostEventList = jdbcTemplate.query(carAccidentPostEventQuery, postId.toArray(), new PostCarAccidentEventMapper());
 
         String naturalDisasterPostEventQuery =
                 "SELECT *\n" +
@@ -97,7 +97,35 @@ public class PostRepositoryImpl implements PostRepository {
                                 "JOIN Event e ON e.event_id = p.event_id\n" +
                                         "JOIN NaturalDisaster nd ON nd.event_id = p.event_id\n" +
                                                 "WHERE p.post_id IN (?);";
-        List<PostEvent> naturalDisasterPostEventList = jdbcTemplate.query(naturalDisasterPostEventQuery,  postId.toArray(), new PostEventMapper());
+        List<PostEvent> naturalDisasterPostEventList = jdbcTemplate.query(naturalDisasterPostEventQuery,  postId.toArray(), new PostNaturalDisasterEventMapper());
+        return Stream.of(crimePostEventList,carAccidentPostEventList,naturalDisasterPostEventList).flatMap(Collection::stream).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PostEvent> getPostInfoByCommunityId(List<String> communityId) {
+        String crimePostEventQuery =
+                "SELECT *\n" +
+                        "FROM Post p\n" +
+                                "JOIN Event e ON e.event_id = p.event_id\n" +
+                                        "JOIN Crime c ON c.event_id = p.event_id\n" +
+                                                "WHERE e.c_id IN (?);";
+        List<PostEvent> crimePostEventList = jdbcTemplate.query(crimePostEventQuery, communityId.toArray(), new PostCrimeEventMapper());
+
+        String carAccidentPostEventQuery =
+                "SELECT *\n" +
+                        "FROM Post p\n" +
+                                "JOIN Event e ON e.event_id = p.event_id\n" +
+                                        "JOIN CarAccident ca ON ca.event_id = p.event_id\n" +
+                                                "WHERE e.c_id IN (?);";
+        List<PostEvent> carAccidentPostEventList = jdbcTemplate.query(carAccidentPostEventQuery, communityId.toArray(), new PostCarAccidentEventMapper());
+
+        String naturalDisasterPostEventQuery =
+                "SELECT *\n" +
+                        "FROM Post p\n" +
+                                "JOIN Event e ON e.event_id = p.event_id\n" +
+                                        "JOIN NaturalDisaster nd ON nd.event_id = p.event_id\n" +
+                                                "WHERE e.c_id IN (?);";
+        List<PostEvent> naturalDisasterPostEventList = jdbcTemplate.query(naturalDisasterPostEventQuery,  communityId.toArray(), new PostNaturalDisasterEventMapper());
         return Stream.of(crimePostEventList,carAccidentPostEventList,naturalDisasterPostEventList).flatMap(Collection::stream).collect(Collectors.toList());
     }
 

@@ -27,13 +27,14 @@ public class PostController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/post")
     public List<PostEvent> getPostInfo(@RequestParam(value="post_id", required=false) String postId,
-                                       @RequestParam(value="user_id", required=false) String userId) {
-        if (!postId.isEmpty()) {
+                                       @RequestParam(value="user_id", required=false) String userId,
+                                       @RequestParam(value="community_id", required=false) String communityId) {
+        if (postId != null) {
             return postService.getPostInfoByPostId(postId);
-        } else if (postId.isEmpty() && !userId.isEmpty()) {
+        } else if (userId != null) {
             return postService.getAllPostInfoByUserId(userId);
         } else {
-            return postService.getPostInfoByPostId("");
+            return postService.getPostsByCommunityId(communityId);
         }
     }
 
