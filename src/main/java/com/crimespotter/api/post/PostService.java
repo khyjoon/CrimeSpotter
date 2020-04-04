@@ -39,6 +39,10 @@ public class PostService {
         return postRepository.getPostInfoByPostId(new ArrayList<>(Arrays.asList(postId)));
     }
 
+    public List<PostEvent> getPostsByCommunityId(String communityId) {
+        return postRepository.getPostInfoByCommunityId(new ArrayList<>(Arrays.asList(communityId)));
+    }
+
     public List<PostEvent> getAllPostInfoByUserId(String userId) {
         return postRepository.getPostsInfoByUserId(userId);
     }

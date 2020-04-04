@@ -13,6 +13,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.POST, value = "/users")
     public List<User> addUser(@RequestParam("user_name") String userName,
                              @RequestParam("password") String password,

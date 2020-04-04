@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS Event (
     time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     title CHAR(100),
     severity INTEGER,
-    caused_injury CHAR(100),
+    caused_injury BIT,
     FOREIGN KEY(location_id) REFERENCES Location(location_id),
     FOREIGN KEY(c_id) REFERENCES Community(c_id)
 );
