@@ -5,18 +5,6 @@ import UserProfile from './UserProfile'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
-
-// example community list -- eventually get it from a http request
-let communities = [
-    'Vancouver',
-    'Surrey',
-    'Richmond',
-    'Downtown',
-]
-
-let i;
-
-
 class Community extends Component {
     constructor(props) {
         super(props);
