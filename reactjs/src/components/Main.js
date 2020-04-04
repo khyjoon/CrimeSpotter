@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import '../App.css'
-import { Button, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Button, ListGroup, ListGroupItem, Dropdown } from 'react-bootstrap'
 import UserProfile from './UserProfile'
 import { CardStack, Card } from 'react-cardstack'
+
 
 class Main extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        // get requests here
     }
 
     render() {
@@ -25,7 +30,19 @@ class Main extends Component {
                     {UserProfile.getCommunity()}
                 </h1>
 
-                <p> Drop down list here</p>
+                <Dropdown>
+                    <Dropdown.Toggle variant="danger" id="dropdown-basic">
+                        Event Type
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick = {this.selectFilter}>Crime</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">Car Accident</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">Natural Disaster</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                
+
+
                 <p>Create Post Button --> Take to Form/Popup</p>
 
                 <p> ScrollView of Posts</p>

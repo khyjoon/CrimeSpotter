@@ -3,28 +3,54 @@ import '../App.css'
 import crimelogo from '../assets/crimelogo.jpeg'
 import { Button } from 'react-bootstrap'
 import UserProfile from './UserProfile'
-import API from '../utils/API'
+import axios from 'axios'
 
 class Login extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {name: '', password: ''};
+        this.state = {id: '', name: '', password: ''};
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
+
+    // handleChange = event => {
+    //     this.setState({ name: event.target.value, password: event.target.value});
+    // }
+
+    componentDidMount() {
+
+    }
+
+    handleSubmit = event => {
         event.preventDefault();
         // TODO: retrieve login and password via HTTP request here;
         // if valid:
         // NOTE: when i implement axios.get, we will use the username/userid/useremail from the http response
-        UserProfile.setName(event.target.name.value);
-        if (UserProfile.getName() == 'kim') {
-            this.props.history.push('/community');
-        }
-        else {
-            alert('Wrong username or password!');
-        }
+        
+        axios.get('http://localhost:8080/users', {
+            params: {
+                user_id:'',
+                user_name: event.target.name.value,
+                password: event.target.password.value
+            }
+        }).then(res => {
+            console.log(res);
+            console.log(res.data);
+            UserProfile.setID(res.data[0].userId);
+            UserProfile.setName(res.data[0].userName);
+            UserProfile.setEmail(res.data[0].email);
+
+            if (UserProfile.getName() == res.data[0].userName) {
+                this.props.history.push('/community');
+            }
+            else {
+                alert("Wrong username or password");
+            }
+        }).catch(err => {
+            console.log(err)
+            alert("Wrong username or password");
+        })
     }
 
     registerNewUser = () => {

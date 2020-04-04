@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import '../App.css'
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap'
 import UserProfile from './UserProfile'
-import {useHistory} from 'react-router-dom'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+
 
 // example community list -- eventually get it from a http request
 let communities = [
@@ -20,6 +22,17 @@ class Community extends Component {
         super(props);
         // this.handleClick = this.handleClick.bind(this);
     }
+    state = {
+        communities: [],
+    };
+
+    componentDidMount() {
+        axios.get("http://localhost:8080/users/usercommunity")
+            .then(res => {
+                console.log(res);
+                this.setState({communities: res.data});
+            })
+    }
 
     // handleClick(event) {
     //     event.preventDefault;
@@ -28,8 +41,7 @@ class Community extends Component {
     // }
 
     render() {
-        const data = [{'name':'Vancouver'}, {'name': 'Richmond'}, {'name': 'Downtown'}];
-        // const listItems = data.map((d) => <li key = {d.name}>{d.name}</li>);
+        const history = this.props.history;
 
         return (
             <div style = {{
@@ -45,11 +57,15 @@ class Community extends Component {
                 <p>Community drop down menu selector</p>
 
                 <ListGroup variant="flush">
-                    {data.map(function(d, idx) {
+                    {this.state.communities.map(function(d, idx) {
+
                         return (<ListGroupItem onClick = {() => {
+                            UserProfile.setCommunityID(d.communityId);
                             UserProfile.setCommunity(d.name);
-                            alert(d.name);
+                            alert(UserProfile.getCommunityID() + UserProfile.getCommunity());
                             // this.props.history.push('/main');
+                            // pagebutton();
+                            history.push('/main');
                         }} key={idx}>{d.name}</ListGroupItem>)
                     })}
                 </ListGroup>

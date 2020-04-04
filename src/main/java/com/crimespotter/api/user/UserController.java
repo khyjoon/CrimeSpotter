@@ -13,6 +13,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.POST, value = "/users")
     public List<User> addUser(@RequestParam("user_name") String userName,
                              @RequestParam("password") String password,
@@ -21,28 +22,33 @@ public class UserController {
         return userService.addUser(userName, password, email, isAdmin);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.PUT, value = "/users")
     public List<User> updateUsername(@RequestParam("old_user_name") String currUsername,
                                      @RequestParam("new_user_name") String newUsername) {
         return userService.updateUserName(currUsername, newUsername);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.DELETE, value = "/users")
     public boolean removeUser(@RequestParam("userId") String userId) {
         return userService.removeUser(userId);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.PUT, value = "/users/community")
     public boolean addCommunity(@RequestParam("community_name") String community_name) {
         return userService.addCommunity(community_name);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.PUT, value = "/users/usercommunity")
     public boolean addCommunity(@RequestParam("user_id") String userID,
                                 @RequestParam("c_id") String cId) {
         return userService.addUserToCommunity(cId, userID);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public List<User> getUserInfo(@RequestParam(value="user_id", required=false) String userID,
                                   @RequestParam(value="user_name", required=false) String userName,
@@ -56,6 +62,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.GET, value = "/users/usercommunity")
     public List<Community> getAllCommunities() {
         return userService.getAllCommunities();

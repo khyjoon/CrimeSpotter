@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 /* To access  */
 
 var UserProfile = (function() {
+    var httpres = "";
     var userID = "";
     var userName = "";
     var userEmail = "";
@@ -13,6 +14,10 @@ var UserProfile = (function() {
     var userIsAdmin ="";
 
     /* Getters */
+    var getRes = function() {
+        return localStorage.getItem('httpres');
+    }
+
     var getID = function() {
         // return userID;
         return localStorage.getItem('userID');
@@ -43,6 +48,11 @@ var UserProfile = (function() {
     };
 
     /* Setters */
+    var setRes = function(httpresponse) {
+        httpres = httpresponse;
+        localStorage.setItem('httpres', httpresponse);
+    }
+
     var setID = function(id) {
         userID = id;
         localStorage.setItem('userID', id);
@@ -77,6 +87,7 @@ var UserProfile = (function() {
     /* Setters */
 
     return {
+        getRes: getRes,
         getID: getID,
         getName: getName,
         getEmail: getEmail,
@@ -84,6 +95,8 @@ var UserProfile = (function() {
         getCommunity: getCommunity,
         getPostID: getPostID,
         getIsAdmin: getIsAdmin,
+
+        setRes: setRes,
         setID: setID,
         setName: setName,
         setEmail: setEmail,

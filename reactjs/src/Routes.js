@@ -16,7 +16,6 @@ class Routes extends Component {
                 <Route path = "/community" component = {Community}/>
                 <Route path = "/register" component = {Register}/>
                 <Route path = "/main" component = {Main}/>
-                <Route path = "/user" component = {UserProfile}/>
                 <Route component = {Error}/>                
               </Switch>
             </BrowserRouter>
