@@ -50,8 +50,7 @@ class Community extends Component {
                         return (<ListGroupItem onClick = {() => {
                             UserProfile.setCommunityID(d.communityId);
                             UserProfile.setCommunity(d.name);
-                            alert(UserProfile.getCommunityID() + UserProfile.getCommunity());
-                            
+                            // alert(UserProfile.getCommunityID() + UserProfile.getCommunity());
                             history.push('/main');
                         }} key={idx}>{d.name}</ListGroupItem>)
                     })}

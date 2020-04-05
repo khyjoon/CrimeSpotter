@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import '../App.css'
 import { Button, ListGroup, ListGroupItem, Dropdown } from 'react-bootstrap'
 import UserProfile from './UserProfile'
-import { CardStack, Card } from 'react-cardstack'
 import axios from 'axios'
 import Popup from 'reactjs-popup'
 
@@ -137,6 +136,10 @@ class Main extends Component {
         this.props.history.push('/');
     }
 
+    logOut = () => {
+        this.props.history.push('/');
+    }
+
 
 
     render() {
@@ -262,22 +265,11 @@ class Main extends Component {
                             <Dropdown.Item onClick = {this.goToCommunity}>Back to Community Selection</Dropdown.Item>
                             <Dropdown.Item onClick = {this.changeUserName}>Change User Name</Dropdown.Item>
                             <Dropdown.Item onClick = {this.deleteUser}>Delete User</Dropdown.Item>
+                            <Dropdown.Item onClick = {this.logOut}>Log Out</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
 
-                {/* <CardStack
-                    height={500}
-                    width={400}
-                    background='#f8f8f8'
-                    hoverOffset={25}>
-                    <Card background = 'lightblue'>
-                        <h1>Post 1</h1>
-                    </Card>
-                    <Card background = 'lightblue'>
-                        <h1>Post 2</h1>
-                    </Card>
-                </CardStack> */}
                 <ListGroup variant = "primary">
                 {this.state.posts.map(function(d,idx) {
                     return (
@@ -286,12 +278,21 @@ class Main extends Component {
                             {d.eventType == 'crime' &&
                                 <div>
                                     <h1>{d.title}</h1>
-                                    <p>User: {d.userId}</p>
+                                    {/* <p>User: {d.userId}</p> */}
                                     <p>Time of Post: {d.postTime}</p>
                                     <p>Description: {d.suspectDesription}</p>
                                     <p>Crime Type: {d.crimeType}</p>
                                     <p>Severity: {d.severity}</p>
                                     <p>Anybody hurt?: {d.causedInjury ? 'Yes': 'No'}</p>
+                                    <Button onClick={() => {
+                                        axios.get('http://localhost:8080/users', {
+                                            params: {
+                                                user_id: d.userId,
+                                            }
+                                        }).then(res => {
+                                            alert("Username: " + res.data[0].userName + "\n" + "Email: " + res.data[0].email);
+                                        })
+                                    }}>Click for User Info</Button>
                                 </div>
                             }
                             
@@ -299,24 +300,42 @@ class Main extends Component {
                             {d.eventType == 'car_accident' &&
                                 <div>
                                     <h1>{d.title}</h1>
-                                    <p>User: {d.userId}</p>
+                                    {/* <p>User: {d.userId}</p> */}
                                     <p>Time of Post: {d.postTime}</p>
                                     <p>Collision Type: {d.collisionType}</p>
                                     <p>Pedestrians involved: {d.pedestriansInvolved}</p>
                                     <p>Severity: {d.severity}</p>
                                     <p>Anybody hurt?: {d.causedInjury ? 'Yes': 'No'}</p>
+                                    <Button onClick={() => {
+                                        axios.get('http://localhost:8080/users', {
+                                            params: {
+                                                user_id: d.userId,
+                                            }
+                                        }).then(res => {
+                                            alert("Username: " + res.data[0].userName + "\n" + "Email: " + res.data[0].email);
+                                        })
+                                    }}>Click for User Info</Button>
                                 </div>  
                             }
                             
                             {d.eventType =='natural_disaster' &&
                                 <div>
                                     <h1>{d.title}</h1>
-                                    <p>User: {d.userId}</p>
+                                    {/* <p>User: {d.userId}</p> */}
                                     <p>Time of Post: {d.postTime}</p>
                                     <p>Disaster type: {d.type}</p>
                                     <p>Magnitude: {d.magnitude}</p>
                                     <p>Severity: {d.severity}</p>
                                     <p>Anybody hurt?: {d.causedInjury ? 'Yes': 'No'}</p>
+                                    <Button onClick={() => {
+                                        axios.get('http://localhost:8080/users', {
+                                            params: {
+                                                user_id: d.userId,
+                                            }
+                                        }).then(res => {
+                                            alert("Username: " + res.data[0].userName + "\n" + "Email: " + res.data[0].email);
+                                        })
+                                    }}>Click for User Info</Button>
                                 </div>
                             }
 
