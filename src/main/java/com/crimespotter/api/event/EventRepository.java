@@ -10,6 +10,8 @@ interface EventRepository {
 
     List<Location> getLocationById(String location_id);
 
+    List<Location> getLocationByCoordinates(Float latitude, Float longitude);
+
     void addEvent(String event_id, String location_id, Integer c_id, String title, Integer severity, boolean caused_injury);
 
     List<Event> addCrime(String event_id, String location_id, Integer c_id, String title, Integer severity, boolean caused_injury, String suspect_description, String crime_type);
