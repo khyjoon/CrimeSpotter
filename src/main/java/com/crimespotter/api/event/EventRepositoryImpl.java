@@ -35,9 +35,9 @@ public class EventRepositoryImpl implements EventRepository {
         }
 
         String insertLocationQuery = "INSERT INTO Location (location_id, latitude, longitude)\n" +
-                "VALUES (?,?,?)";
+                "VALUES (?,?,?)\n" + "ON DUPLICATE KEY UPDATE location_id=location_id, latitude=latitude, longitude=longitude";
         String insertCoordinatesQuery = "INSERT INTO Coordinates (latitude, longitude, location_name)\n" +
-                "VALUES (?,?,?)";
+                "VALUES (?,?,?\n)" + "ON DUPLICATE KEY UPDATE latitude=latitude, longitude=longitude, location_name=location_name";
 
         jdbcTemplate.update(insertLocationQuery, location_id, latitude, longitude);
         jdbcTemplate.update(insertCoordinatesQuery, latitude, longitude, location_name);
@@ -131,7 +131,7 @@ public class EventRepositoryImpl implements EventRepository {
 
         String naturalDisasterEventQuery =
                 "SELECT *\n" +
-                        "FROM NaturalDisaster e\n" +
+                        "FROM Event e\n" +
                             "JOIN NaturalDisaster nd ON nd.event_id = e.event_id\n" +
                                 "WHERE e.event_id IN (?);";
         List<Event> naturalDisasterEvent = jdbcTemplate.query(naturalDisasterEventQuery,  eventIds.toArray(), new NaturalDisasterMapper());

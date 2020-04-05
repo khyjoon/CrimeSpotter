@@ -45,15 +45,15 @@ public class EventController {
                                                @RequestParam("community_id") Integer communityId,
                                                @RequestParam("title") String title,
                                                @RequestParam("severity") Integer severity,
-                                               @RequestParam("caused_injury") boolean caused_injury,
+                                               @RequestParam("caused_injury") boolean causedInjury,
                                                @RequestParam("type") String type,
                                                @RequestParam("magnitude") Integer magnitude) {
-        return eventService.addNaturalDisaster(locationId, communityId, title, severity, caused_injury, type, magnitude);
+        return eventService.addNaturalDisaster(locationId, communityId, title, severity, causedInjury, type, magnitude);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/event/car_accident")
-    public List<Event> addCarAccidentEvent(@RequestParam(value="location_id", required=true) String locationId,
-                                      @RequestParam(value="community_id", required=true) Integer communityId,
+    public List<Event> addCarAccidentEvent(@RequestParam("location_id") String locationId,
+                                      @RequestParam("community_id") Integer communityId,
                                       @RequestParam("title") String title,
                                       @RequestParam("severity") Integer severity,
                                       @RequestParam("caused_injury") boolean causedInjury,

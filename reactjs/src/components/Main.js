@@ -62,54 +62,147 @@ class Main extends Component {
     handleCrimeSubmit = event => {
         event.preventDefault();
         const data = new FormData(event.target);
-        // alert(event.target.location.value);
-        // alert(this.state.latitude + this.state.longitude);
-        // alert(event.target.title.value);
-        // alert(event.target.severity.value);
-        alert((event.target.injury.checked) ? 1 : 0);
-        alert(Number(UserProfile.getCommunityID()));
-        // alert(event.target.description.value);
-        // alert(event.target.crimetype.value);
-        
-        // Get location ID first:
+        const form = event.target;
+
+        // Find location ID
         axios.put('http://localhost:8080/event/location', null, {
             params: {
                 latitude: this.state.latitude,
                 longitude: this.state.longitude,
-                name: event.target.location.value
+                name: form.location.value
             }
         }).then(res => {
             console.log(res);
             console.log(res.data);
             UserProfile.setLocationID(res.data[0].locationId)
-            // // Get event ID
-            // axios.put('http://localhost:8080/event/crime', null, {
-            //     params: {
-            //         location_id: UserProfile.getLocationID(),
-            //         community_id: Number(UserProfile.getCommunityID()),
-            //         title: event.target.title.value,
-            //         severity: event.target.severity.value,
-            //         caused_injury: (event.target.injury.checked) ? 1 : 0,
-            //         suspect_description: event.target.description.value,
-            //         crime_type: event.target.crimetype.value
-            //     }
-            // }).then(res => {
-            //     console.log(res);
-            //     console.log(res.data);
-            //     alert("sent");
-            //     alert(event.target.title.value);
-            // }).catch(err => console.log(err))
+            // Get event ID
+            axios.put('http://localhost:8080/event/crime', null, {
+                params: {
+                    location_id: UserProfile.getLocationID(),
+                    community_id: Number(UserProfile.getCommunityID()),
+                    title: form.title.value,
+                    severity: form.severity.value,
+                    caused_injury: (form.injury.checked) ? 1 : 0,
+                    suspect_description: form.description.value,
+                    crime_type: form.crimetype.value
+                }
+            }).then(res => {
+                console.log(res);
+                console.log(res.data);
+                const eventid = res.data[0].eventId;
+                // Send Post ID
+                axios.put('http://localhost:8080/post', null, {
+                    params: {
+                        user_id: UserProfile.getID(),
+                        event_id: eventid,
+                        isActive: true,
+                    }
+                }).then(res => {
+                    console.log(res.data);
+                    window.location.reload(false);
 
+                }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
         }).catch(err => console.log(err))
 
     }
 
-    handleCarAccidentSubmit = event => {
-
-    }
 
     handleNaturalDisasterSubmit = event => {
-        
+        event.preventDefault();
+        const data = new FormData(event.target);
+        const form = event.target;
+
+        // Find location ID
+        axios.put('http://localhost:8080/event/location', null, {
+            params: {
+                latitude: this.state.latitude,
+                longitude: this.state.longitude,
+                name: form.location.value
+            }
+        }).then(res => {
+            console.log(res);
+            console.log(res.data);
+            UserProfile.setLocationID(res.data[0].locationId)
+            // Get event ID
+            axios.put('http://localhost:8080/event/natural_disaster', null, {
+                params: {
+                    location_id: UserProfile.getLocationID(),
+                    community_id: Number(UserProfile.getCommunityID()),
+                    title: form.title.value,
+                    severity: form.severity.value,
+                    caused_injury: (form.injury.checked) ? 1 : 0,
+                    type: form.disastertype.value,
+                    magnitude: form.magnitude.value
+                }
+            }).then(res => {
+                console.log(res);
+                console.log(res.data);
+                const eventid = res.data[0].eventId;
+                // Send Post ID
+                axios.put('http://localhost:8080/post', null, {
+                    params: {
+                        user_id: UserProfile.getID(),
+                        event_id: eventid,
+                        isActive: true,
+                    }
+                }).then(res => {
+                    console.log(res.data);
+                    window.location.reload(false);
+                }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
+        }).catch(err => console.log(err))       
+    }
+
+    handleCarAccidentSubmit = event => {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        const form = event.target;
+
+        // Find location ID
+        axios.put('http://localhost:8080/event/location', null, {
+            params: {
+                latitude: this.state.latitude,
+                longitude: this.state.longitude,
+                name: form.location.value
+            }
+        }).then(res => {
+            console.log(res);
+            console.log(res.data);
+            UserProfile.setLocationID(res.data[0].locationId)
+            // Get event ID
+            axios.put('http://localhost:8080/event/car_accident', null, {
+                params: {
+                    location_id: UserProfile.getLocationID(),
+                    community_id: Number(UserProfile.getCommunityID()),
+                    title: form.title.value,
+                    severity: form.severity.value,
+                    caused_injury: (form.injury.checked) ? 1 : 0,
+                    collision_type: form.collisiontype.value,
+                    pedestrians_involved: form.pedestrians.value,
+                    license: form.licenseplate.value,
+                    make: form.carmake.value,
+                    model: form.carmodel.value,
+                    colour: form.carcolour.value
+                }
+            }).then(res => {
+                console.log(res);
+                console.log(res.data);
+                const eventid = res.data[0].eventId;
+                // Send Post ID
+                axios.put('http://localhost:8080/post', null, {
+                    params: {
+                        user_id: UserProfile.getID(),
+                        event_id: eventid,
+                        isActive: true,
+                    }
+                }).then(res => {
+                    console.log(res.data);
+                    window.location.reload(false);
+
+                }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
+        }).catch(err => console.log(err))
     }
 
     goToCommunity = () => {
@@ -175,18 +268,26 @@ class Main extends Component {
                                     <p> Your latitude is: {this.state.latitude} </p>
                                     <p> Your longitude is: {this.state.longitude} </p>
                                 </div>
-                                <h1 style = {{color:'blue'}}>Details</h1>
-                                <p> Title of Post: </p>
-                                <input id = "title" type = "text" placeholder = "Enter Post Title here"/>
-                                <p> Severity: </p>
-                                <input id="severity" type = "number" pattern='[0-9]' maxLength='10' placeholder = "How severe is the crime? (Out of 10)"/>
-                                <p> Was there injury?: </p>
-                                <input id = "injury" type="checkbox"/>
-                                <p> Describe the suspect: </p>
-                                <textarea id = "description" type = "text" placeholder = "E.g. sex, color of hair, clothing, build"/>
-                                <p>Type of crime?: </p>
-                                <input id = "crimetype" type="text" placeholder = "E.g. theft, assault, arson"/>
-                                
+                                <div>
+                                    <h1 style = {{color:'blue'}}>Details</h1>
+                                    <p> Title of Post: 
+                                        <input id = "title" type = "text" placeholder = "Enter Post Title here"/> 
+                                    </p>
+                                    <p> Severity (Out of 10):  
+                                        <input id="severity" type = "number" pattern='[0-9]' placeholder = "How severe is the crime?"/>
+                                    </p>
+                                    <p> Was there injury?:
+                                        <input id = "injury" type="checkbox"/>
+                                    </p>
+                                    <div> Describe the suspect: 
+                                        <div>
+                                            <textarea id = "description" type = "text" placeholder = "E.g. sex, color of hair, clothing, build"/>
+                                        </div>
+                                    </div>
+                                    <p>Type of crime?: 
+                                        <input id = "crimetype" type="text" placeholder = "E.g. theft, assault, arson"/>
+                                    </p>
+                                </div>
                                 <Button variant = "primary" type = "submit" active>
                                     Submit!
                                 </Button>
@@ -195,8 +296,7 @@ class Main extends Component {
                         
                     </Popup>
 
-                    <Popup trigger={<Button size="lg" onClick={this.resetForm}>Create Car Accident Post</Button>} modal closeOnDocumentClick> 
-                        {close => (
+                    <Popup trigger={<Button size="lg" onClick={this.resetForm}>Create Natural Disaster Post</Button>} modal closeOnDocumentClick> 
                         <div style = {{
                             display: 'flex',
                             alignItems: 'center',
@@ -204,37 +304,92 @@ class Main extends Component {
                             marginTop: '2%',
                             flexDirection: 'column'
                         }}> 
-                            <form id = "create-form" onSubmit = {this.handleSubmit} style={{marginTop:'1%'}}>
-                                <Button variant = "primary" type = "submit" active onClick={() => {
-                                    this.state.eventName = "crime";
-                                    close();
-                                    }}>
+                            <form id = "create-form" onSubmit = {this.handleNaturalDisasterSubmit} style={{marginTop:'1%'}}>
+                                <h1 style = {{color:'blue'}}>Location</h1>
+                                <div> Where are you right now? 
+                                    <div>
+                                        <textarea id = "location" type = "text" placeholder = "Enter Location Details"/>
+                                    </div>
+                                    <p> Your latitude is: {this.state.latitude} </p>
+                                    <p> Your longitude is: {this.state.longitude} </p>
+                                </div>
+                                <div>
+                                    <h1 style = {{color:'blue'}}>Details</h1>
+                                    <p> Title of Post: 
+                                        <input id = "title" type = "text" placeholder = "Enter Post Title here"/> 
+                                    </p>
+                                    <p>Severity (Out of 10):  
+                                        <input id="severity" type = "number" pattern='[0-9]' placeholder = "How severe is the accident?"/>
+                                    </p>
+                                    <p>Was there injury?:
+                                        <input id = "injury" type="checkbox"/>
+                                    </p>
+                                    <p>Type of Disaster:
+                                        <input id = "disastertype" type = "text" placeholder = "e.g. Earthquake, Hurricane"/> 
+                                    </p>
+                                    <p>Magnitude (Out of 10):  
+                                        <input id="magnitude" type = "number" pattern='[0-9]' placeholder = "What is the scale of disaster?"/>
+                                    </p>
+                                </div>
+                                <Button variant = "primary" type = "submit" active>
                                     Submit!
                                 </Button>
                             </form>                        
                         </div>    
-                    )}    
                     </Popup>
 
-                    <Popup trigger={<Button size="lg" onClick={this.resetForm}>Create Natural Disaster Post</Button>} modal closeOnDocumentClick> 
-                        {close => (
-                        <div style = {{
+                    <Popup trigger={<Button size="lg" onClick={this.resetForm}>Create Car Accident Post</Button>} modal closeOnDocumentClick> 
+                    <div style = {{
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             marginTop: '2%',
                             flexDirection: 'column'
                         }}> 
-                            <form id = "create-form" onSubmit = {this.handleSubmit} style={{marginTop:'1%'}}>
-                                <Button variant = "primary" type = "submit" active onClick={() => {
-                                    this.state.eventName = "crime";
-                                    close();
-                                    }}>
+                            <form id = "create-form" onSubmit = {this.handleCarAccidentSubmit} style={{marginTop:'1%'}}>
+                                <h1 style = {{color:'blue'}}>Location</h1>
+                                <div> Where are you right now? 
+                                    <div>
+                                        <textarea id = "location" type = "text" placeholder = "Enter Location Details"/>
+                                    </div>
+                                    <p> Your latitude is: {this.state.latitude} </p>
+                                    <p> Your longitude is: {this.state.longitude} </p>
+                                </div>
+                                <div>
+                                    <h1 style = {{color:'blue'}}>Details</h1>
+                                    <p> Title of Post: 
+                                        <input id = "title" type = "text" placeholder = "Enter Post Title here"/> 
+                                    </p>
+                                    <p>Severity (Out of 10):  
+                                        <input id="severity" type = "number" pattern='[0-9]' placeholder = "How severe is the accident?"/>
+                                    </p>
+                                    <p>Was there injury?:
+                                        <input id = "injury" type="checkbox"/>
+                                    </p>
+                                    <p>Describe the collision:
+                                        <input id = "collisiontype" type = "text" placeholder = "e.g. T-boned, Rear-ended"/> 
+                                    </p>
+                                    <p>Pedestrians injured: 
+                                        <input id="pedestrians" type = "number" pattern='[0-9]' placeholder = "How many injured?"/>
+                                    </p>
+                                    <p>License plate number:
+                                        <input id = "licenseplate" type = "text" placeholder = "Enter plate number here"/> 
+                                    </p>
+                                    <p>Make of the car:
+                                        <input id = "carmake" type = "text" placeholder = "e.g. Toyota, Volkswagen"/> 
+                                    </p>
+                                    <p>Model of the car:
+                                        <input id = "carmodel" type = "text" placeholder = "e.g. Camry, Jetta"/> 
+                                    </p>
+                                    <p>Colour of the car:
+                                        <input id = "carcolour" type = "text" placeholder = "e.g. Blue, Black, Red, Grey"/> 
+                                    </p>
+                                </div>
+                                <Button variant = "primary" type = "submit" active>
                                     Submit!
                                 </Button>
                             </form>                        
                         </div>    
-                    )}    
                     </Popup>
                 </div>
                 
