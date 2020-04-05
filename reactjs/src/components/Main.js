@@ -18,20 +18,19 @@ class Main extends Component {
     state = {
         posts: [],
         postsFound: [],
-        eventType: null,
         latitude: null,
         longitude: null,
     };
 
     componentDidMount() {
         // get requests here
-        if ("geolocation" in navigator) {
+        if (navigator.geolocation) {
             console.log("Geolocation available!!");
             navigator.geolocation.watchPosition(position => {
-                this.setState({latitude: position.coords.latitude,
-                longitude: position.coords.longitude});
-                console.log("Latitude is :", position.coords.latitude);
-                console.log("Longitude is :", position.coords.longitude);
+                this.setState({latitude: (position.coords.latitude).toFixed(3),
+                longitude: (position.coords.longitude).toFixed(3)});
+                console.log("Latitude is :", (position.coords.latitude).toFixed(3));
+                console.log("Longitude is :", (position.coords.longitude).toFixed(3));
             });
         }
         else {
@@ -56,10 +55,6 @@ class Main extends Component {
 
     }
 
-    filterPosts = () => {
-        // filter the post section here
-    }
-
     resetForm = () => {
         document.getElementById("create-form").reset();
     }
@@ -79,34 +74,32 @@ class Main extends Component {
         // Get location ID first:
         axios.put('http://localhost:8080/event/location', null, {
             params: {
-                // latitude: this.state.latitude,
-                // longitude: this.state.longitude,
-                latitude: 778,
-                longitude: 797,
+                latitude: this.state.latitude,
+                longitude: this.state.longitude,
                 name: event.target.location.value
             }
         }).then(res => {
             console.log(res);
             console.log(res.data);
             UserProfile.setLocationID(res.data[0].locationId)
+            // // Get event ID
+            // axios.put('http://localhost:8080/event/crime', null, {
+            //     params: {
+            //         location_id: UserProfile.getLocationID(),
+            //         community_id: Number(UserProfile.getCommunityID()),
+            //         title: event.target.title.value,
+            //         severity: event.target.severity.value,
+            //         caused_injury: (event.target.injury.checked) ? 1 : 0,
+            //         suspect_description: event.target.description.value,
+            //         crime_type: event.target.crimetype.value
+            //     }
+            // }).then(res => {
+            //     console.log(res);
+            //     console.log(res.data);
+            //     alert("sent");
+            //     alert(event.target.title.value);
+            // }).catch(err => console.log(err))
 
-        }).catch(err => console.log(err))
-
-        axios.put('http://localhost:8080/event/crime', null, {
-            params: {
-                location_id: UserProfile.getLocationID(),
-                community_id: Number(UserProfile.getCommunityID()),
-                title: event.target.title.value,
-                severity: event.target.severity.value,
-                caused_injury: (event.target.injury.checked) ? 1 : 0,
-                suspect_description: event.target.description.value,
-                crime_type: event.target.crimetype.value
-            }
-        }).then(res => {
-            console.log(res);
-            console.log(res.data);
-            alert("sent");
-            alert(event.target.title.value);
         }).catch(err => console.log(err))
 
     }
@@ -176,33 +169,24 @@ class Main extends Component {
                             <form id = "create-form" onSubmit = {this.handleCrimeSubmit} style={{marginTop:'1%'}}>
                                 <h1 style = {{color:'blue'}}>Location</h1>
                                 <div> Where are you right now? 
-                                    <p>
+                                    <div>
                                         <textarea id = "location" type = "text" placeholder = "Enter Location Details"/>
-                                    </p>
+                                    </div>
                                     <p> Your latitude is: {this.state.latitude} </p>
                                     <p> Your longitude is: {this.state.longitude} </p>
                                 </div>
                                 <h1 style = {{color:'blue'}}>Details</h1>
-                                <p>
-                                    <text>Title of Post: </text>
-                                    <input id = "title" type = "text" placeholder = "Enter Post Title here"/>
-                                </p>
-                                <p>
-                                    <text>Severity: </text>
-                                    <input id="severity" type = "number" pattern='[0-9]' maxLength='10' placeholder = "How severe is the crime? (Out of 10)"/>
-                                </p>
-                                <p>
-                                    <text>Was there injury?: </text>
-                                    <input id = "injury" type="checkbox"/>
-                                </p>
-                                <p>
-                                    <text>Describe the suspect: </text>
-                                    <textarea id = "description" type = "text" placeholder = "E.g. sex, color of hair, clothing, build"/>
-                                </p>
-                                <p>
-                                    <text>Type of crime?: </text>
-                                    <input id = "crimetype" type="text" placeholder = "E.g. theft, assault, arson"/>
-                                </p>
+                                <p> Title of Post: </p>
+                                <input id = "title" type = "text" placeholder = "Enter Post Title here"/>
+                                <p> Severity: </p>
+                                <input id="severity" type = "number" pattern='[0-9]' maxLength='10' placeholder = "How severe is the crime? (Out of 10)"/>
+                                <p> Was there injury?: </p>
+                                <input id = "injury" type="checkbox"/>
+                                <p> Describe the suspect: </p>
+                                <textarea id = "description" type = "text" placeholder = "E.g. sex, color of hair, clothing, build"/>
+                                <p>Type of crime?: </p>
+                                <input id = "crimetype" type="text" placeholder = "E.g. theft, assault, arson"/>
+                                
                                 <Button variant = "primary" type = "submit" active>
                                     Submit!
                                 </Button>
@@ -346,7 +330,7 @@ class Main extends Component {
                 <div style = {{
                     marginTop: '3%',
                 }}>
-                    <ListGroup variant = "flush" horizontal>
+                    <ListGroup horizontal>
                     {this.state.postsFound.map(function(d,idx) {
                         return (
                             <ListGroupItem key = {idx}>

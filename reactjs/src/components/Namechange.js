@@ -46,7 +46,7 @@ class Namechange extends Component {
                         <input id = "olduser" type = "text" placeholder = "Enter Old Account Name"/>
                     </p>
                     <p>
-                        <input id = "newuser" type = "password" placeholder = "Enter New Account Nmae"/>
+                        <input id = "newuser" type = "text" placeholder = "Enter New Account Nmae"/>
                     </p>
                     <Button variant = "primary" type = "submit" active>
                         Submit!
