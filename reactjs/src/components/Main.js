@@ -246,7 +246,7 @@ class Main extends Component {
                 <h1 style = {{
                     color:'blue',
                 }}>
-                    {UserProfile.getCommunity()}
+                    Welcome to {UserProfile.getCommunity()}, {UserProfile.getName()}
                 </h1>
 
                 <div style = {{

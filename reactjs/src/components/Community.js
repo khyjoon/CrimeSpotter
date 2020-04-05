@@ -42,8 +42,7 @@ class Community extends Component {
                 <h1 style = {{
                     color:'blue',
                 }}>Select Your Community</h1>
-                <p>Community drop down menu selector</p>
-
+                
                 <ListGroup variant="flush">
                     {this.state.communities.map(function(d, idx) {
 

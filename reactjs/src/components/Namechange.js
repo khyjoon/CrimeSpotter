@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
+import UserProfile from './UserProfile';
 
 class Namechange extends Component {
     constructor(props) {
@@ -14,15 +15,15 @@ class Namechange extends Component {
         // check all data and see it is correct
         axios.put('http://localhost:8080/users', null, {
             params: {
-                old_user_name: event.target.olduser.value,
-                new_user_name: event.target.newuser.value,
+                old_user_name: event.target.newuser.value,
+                new_user_name: event.target.olduser.value,
             }
         }).then(res => {
             console.log(res);
             console.log(res.data);
         }).catch(err => console.log(err))
         alert("Changed name!");
-        // alert("Changed name from " {event.target.olduser.value} " to " {event.target.newuser.value})
+        UserProfile.setName(event.target.newuser.value);
         this.props.history.push('/main');
     }
 
