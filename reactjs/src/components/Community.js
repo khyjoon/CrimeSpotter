@@ -51,8 +51,7 @@ class Community extends Component {
                             UserProfile.setCommunityID(d.communityId);
                             UserProfile.setCommunity(d.name);
                             alert(UserProfile.getCommunityID() + UserProfile.getCommunity());
-                            // this.props.history.push('/main');
-                            // pagebutton();
+                            
                             history.push('/main');
                         }} key={idx}>{d.name}</ListGroupItem>)
                     })}

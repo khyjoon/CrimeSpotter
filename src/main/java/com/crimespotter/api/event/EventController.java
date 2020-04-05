@@ -5,15 +5,19 @@ import com.crimespotter.api.event.model.eventinfo.Event;
 import com.crimespotter.api.event.model.locationinfo.Location;
 import com.crimespotter.api.user.model.community.Community;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class EventController {
     @Autowired
     private EventService eventService;

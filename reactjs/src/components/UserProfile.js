@@ -11,6 +11,7 @@ var UserProfile = (function() {
     var userCommunityID = "";
     var userCommunity = "";
     var userPostID = "";
+    var userLocationID = "";
     var userIsAdmin ="";
 
     /* Getters */
@@ -42,6 +43,9 @@ var UserProfile = (function() {
         // return userPostID;
         return localStorage.getItem('userPostID');
     };
+    var getLocationID = function() {
+        return localStorage.getItem('userLocationID');
+    }
     var getIsAdmin = function() {
         // return userIsAdmin;
         return localStorage.getItem('userIsAdmin');
@@ -77,6 +81,10 @@ var UserProfile = (function() {
         userPostID = postid;
         localStorage.setItem('userPostID', postid);
     };
+    var setLocationID = function(locationid) {
+        userLocationID = locationid;
+        localStorage.setItem('userLocationID', locationid);
+    }
     var setIsAdmin = function(isAdmin) {
         userIsAdmin = isAdmin;
         localStorage.setItem('userIsAdmin', isAdmin);
@@ -94,6 +102,7 @@ var UserProfile = (function() {
         getCommunityID: getCommunityID,
         getCommunity: getCommunity,
         getPostID: getPostID,
+        getLocationID: getLocationID,
         getIsAdmin: getIsAdmin,
 
         setRes: setRes,
@@ -103,6 +112,7 @@ var UserProfile = (function() {
         setCommunityID: setCommunityID,
         setCommunity: setCommunity,
         setPostID: setPostID,
+        setLocationID: setLocationID,
         setIsAdmin: setIsAdmin
     }
 })();
