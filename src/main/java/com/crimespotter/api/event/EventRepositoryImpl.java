@@ -29,6 +29,11 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public List<Location> addLocation(String location_id, Float latitude, Float longitude, String location_name) {
+        List<Location> location = getLocationByCoordinates(latitude, longitude);
+        if (!location.isEmpty()) {
+            return location;
+        }
+
         String insertLocationQuery = "INSERT INTO Location (location_id, latitude, longitude)\n" +
                 "VALUES (?,?,?)";
         String insertCoordinatesQuery = "INSERT INTO Coordinates (latitude, longitude, location_name)\n" +
@@ -46,6 +51,16 @@ public class EventRepositoryImpl implements EventRepository {
                         "FROM Location\n" +
                         "WHERE location_id = ?";
         List<Location> location = jdbcTemplate.query(readQuery, new LocationMapper(), location_id);
+        return location;
+    }
+
+    @Override
+    public List<Location> getLocationByCoordinates(Float latitude, Float longitude) {
+        String readQuery =
+                "SELECT *\n" +
+                        "FROM Location\n" +
+                            "WHERE latitude = ? AND longitude = ?";
+        List<Location> location = jdbcTemplate.query(readQuery, new LocationMapper(), latitude, longitude);
         return location;
     }
 
