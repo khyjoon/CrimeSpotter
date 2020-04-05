@@ -126,7 +126,7 @@ public class EventRepositoryImpl implements EventRepository {
                                 "WHERE e.event_id IN (?);";
         List<Event> carAccidentEvent = jdbcTemplate.query(carAccidentEventQuery, eventIds.toArray(), new CarAccidentMapper());
         if (!carAccidentEvent.isEmpty()) {
-            return crimeEvent;
+            return carAccidentEvent;
         }
 
         String naturalDisasterEventQuery =
