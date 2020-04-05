@@ -133,7 +133,7 @@ public class PostRepositoryImpl implements PostRepository {
     public Integer getTotalNumberOfPosts() {
         String readQuery =
                 "SELECT COUNT(post_id)\n" +
-                        "FROM Posts\n";
+                        "FROM Post\n";
         Integer numPosts = jdbcTemplate.queryForObject(readQuery, Integer.class);
         return numPosts;
     }
