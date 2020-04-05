@@ -18,19 +18,22 @@ class Main extends Component {
     state = {
         posts: [],
         postsFound: [],
-        latitude: null,
-        longitude: null,
+        // latitude: null,
+        // longitude: null,
     };
 
     componentDidMount() {
         // get requests here
         if (navigator.geolocation) {
-            console.log("Geolocation available!!");
             navigator.geolocation.watchPosition(position => {
-                this.setState({latitude: (position.coords.latitude).toFixed(3),
-                longitude: (position.coords.longitude).toFixed(3)});
-                console.log("Latitude is :", (position.coords.latitude).toFixed(3));
-                console.log("Longitude is :", (position.coords.longitude).toFixed(3));
+                // this.setState({latitude: (position.coords.latitude).toFixed(3),
+                // longitude: (position.coords.longitude).toFixed(3)});
+                UserProfile.setLatitude((position.coords.latitude).toFixed(3));
+                UserProfile.setLongitude((position.coords.longitude).toFixed(3));
+                // console.log("Latitude is :", (position.coords.latitude).toFixed(3));
+                // console.log("Longitude is :", (position.coords.longitude).toFixed(3));
+                console.log("Latitude is :", UserProfile.getLatitude());
+                console.log("Longitude is :", UserProfile.getLongitude());
             });
         }
         else {
@@ -67,8 +70,8 @@ class Main extends Component {
         // Find location ID
         axios.put('http://localhost:8080/event/location', null, {
             params: {
-                latitude: this.state.latitude,
-                longitude: this.state.longitude,
+                latitude: Number(UserProfile.getLatitude()),
+                longitude: Number(UserProfile.getLongitude()),
                 name: form.location.value
             }
         }).then(res => {
@@ -116,8 +119,8 @@ class Main extends Component {
         // Find location ID
         axios.put('http://localhost:8080/event/location', null, {
             params: {
-                latitude: this.state.latitude,
-                longitude: this.state.longitude,
+                latitude: Number(UserProfile.getLatitude()),
+                longitude: Number(UserProfile.getLongitude()),
                 name: form.location.value
             }
         }).then(res => {
@@ -162,8 +165,8 @@ class Main extends Component {
         // Find location ID
         axios.put('http://localhost:8080/event/location', null, {
             params: {
-                latitude: this.state.latitude,
-                longitude: this.state.longitude,
+                latitude: Number(UserProfile.getLatitude()),
+                longitude: Number(UserProfile.getLongitude()),
                 name: form.location.value
             }
         }).then(res => {
@@ -265,8 +268,8 @@ class Main extends Component {
                                     <div>
                                         <textarea id = "location" type = "text" placeholder = "Enter Location Details"/>
                                     </div>
-                                    <p> Your latitude is: {this.state.latitude} </p>
-                                    <p> Your longitude is: {this.state.longitude} </p>
+                                    <p> Your latitude is: {Number(UserProfile.getLatitude())} </p>
+                                    <p> Your longitude is: {Number(UserProfile.getLongitude())} </p>
                                 </div>
                                 <div>
                                     <h1 style = {{color:'blue'}}>Details</h1>
@@ -310,8 +313,8 @@ class Main extends Component {
                                     <div>
                                         <textarea id = "location" type = "text" placeholder = "Enter Location Details"/>
                                     </div>
-                                    <p> Your latitude is: {this.state.latitude} </p>
-                                    <p> Your longitude is: {this.state.longitude} </p>
+                                    <p> Your latitude is: {Number(UserProfile.getLatitude())} </p>
+                                    <p> Your longitude is: {Number(UserProfile.getLongitude())} </p>
                                 </div>
                                 <div>
                                     <h1 style = {{color:'blue'}}>Details</h1>
@@ -352,8 +355,8 @@ class Main extends Component {
                                     <div>
                                         <textarea id = "location" type = "text" placeholder = "Enter Location Details"/>
                                     </div>
-                                    <p> Your latitude is: {this.state.latitude} </p>
-                                    <p> Your longitude is: {this.state.longitude} </p>
+                                    <p> Your latitude is: {Number(UserProfile.getLatitude())} </p>
+                                    <p> Your longitude is: {Number(UserProfile.getLongitude())} </p>
                                 </div>
                                 <div>
                                     <h1 style = {{color:'blue'}}>Details</h1>

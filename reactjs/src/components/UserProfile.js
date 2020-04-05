@@ -4,7 +4,8 @@ import { render } from 'react-dom'
 /* To access  */
 
 var UserProfile = (function() {
-    var httpres = "";
+    var latitude = "";
+    var longitude = "";
     var userID = "";
     var userName = "";
     var userEmail = "";
@@ -15,8 +16,12 @@ var UserProfile = (function() {
     var userIsAdmin ="";
 
     /* Getters */
-    var getRes = function() {
-        return localStorage.getItem('httpres');
+    var getLatitude = function() {
+        return localStorage.getItem('latitude');
+    }
+    
+    var getLongitude = function() {
+        return localStorage.getItem('longitude');
     }
 
     var getID = function() {
@@ -52,9 +57,14 @@ var UserProfile = (function() {
     };
 
     /* Setters */
-    var setRes = function(httpresponse) {
-        httpres = httpresponse;
-        localStorage.setItem('httpres', httpresponse);
+    var setLatitude = function(newLatitude) {
+        latitude = newLatitude;
+        localStorage.setItem('latitude', newLatitude);
+    }
+
+    var setLongitude = function(newLongitude) {
+        longitude = newLongitude;
+        localStorage.setItem('longitude', newLongitude);
     }
 
     var setID = function(id) {
@@ -95,7 +105,8 @@ var UserProfile = (function() {
     /* Setters */
 
     return {
-        getRes: getRes,
+        getLatitude: getLatitude,
+        getLongitude: getLongitude,
         getID: getID,
         getName: getName,
         getEmail: getEmail,
@@ -105,7 +116,8 @@ var UserProfile = (function() {
         getLocationID: getLocationID,
         getIsAdmin: getIsAdmin,
 
-        setRes: setRes,
+        setLatitude: setLatitude,
+        setLongitude: setLongitude,
         setID: setID,
         setName: setName,
         setEmail: setEmail,
