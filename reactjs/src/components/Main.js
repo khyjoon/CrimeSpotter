@@ -17,6 +17,8 @@ class Main extends Component {
     }
 
     state = {
+        posts: [],
+        postsFound: [],
         eventType: null,
         latitude: null,
         longitude: null,
@@ -36,7 +38,22 @@ class Main extends Component {
         else {
             console.log("Geolocation not available!!");
         }
-        
+
+        axios.get("http://localhost:8080/post", {
+            params: {
+                post_id: null,
+                user_id: null,
+                community_id: Number(UserProfile.getCommunityID()),
+            }
+        }).then(res => {
+            console.log(res);
+            this.setState({posts: res.data});
+        })
+
+        axios.get("http://localhost:8080/post/communitytotal")
+        .then(res => {
+            this.setState({postsFound: res.data});
+        })
 
     }
 
@@ -89,7 +106,7 @@ class Main extends Component {
         }).then(res => {
             console.log(res);
             console.log(res.data);
-            alert("WHAATTTTTT");
+            alert("sent");
             alert(event.target.title.value);
         }).catch(err => console.log(err))
 
@@ -103,7 +120,28 @@ class Main extends Component {
         
     }
 
+    goToCommunity = () => {
+        this.props.history.push('/community');
+    }
+
+    changeUserName = () => {
+        this.props.history.push('/namechange');
+    }
+
+    deleteUser = () => {
+        axios.delete('http://localhost:8080/users', {
+            params: {
+                userId: UserProfile.getID(),
+            }
+        })
+        this.props.history.push('/');
+    }
+
+
+
     render() {
+        const history = this.props.history;
+
         return(
             <div style = {{
                 display: 'flex',
@@ -218,17 +256,17 @@ class Main extends Component {
                 }}>
                     <Dropdown>
                         <Dropdown.Toggle variant="danger" id="dropdown-basic">
-                            Filter Event Type
+                            Menu
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item onClick = {this.filterPosts}>Crime</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Car Accident</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Natural Disaster</Dropdown.Item>
+                            <Dropdown.Item onClick = {this.goToCommunity}>Back to Community Selection</Dropdown.Item>
+                            <Dropdown.Item onClick = {this.changeUserName}>Change User Name</Dropdown.Item>
+                            <Dropdown.Item onClick = {this.deleteUser}>Delete User</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
 
-                <CardStack
+                {/* <CardStack
                     height={500}
                     width={400}
                     background='#f8f8f8'
@@ -239,8 +277,70 @@ class Main extends Component {
                     <Card background = 'lightblue'>
                         <h1>Post 2</h1>
                     </Card>
-                </CardStack>
+                </CardStack> */}
+                <ListGroup variant = "primary">
+                {this.state.posts.map(function(d,idx) {
+                    return (
+                        <ListGroupItem background = 'lightblue' key={idx}>
+                            
+                            {d.eventType == 'crime' &&
+                                <div>
+                                    <h1>{d.title}</h1>
+                                    <p>User: {d.userId}</p>
+                                    <p>Time of Post: {d.postTime}</p>
+                                    <p>Description: {d.suspectDesription}</p>
+                                    <p>Crime Type: {d.crimeType}</p>
+                                    <p>Severity: {d.severity}</p>
+                                    <p>Anybody hurt?: {d.causedInjury ? 'Yes': 'No'}</p>
+                                </div>
+                            }
+                            
+                            
+                            {d.eventType == 'car_accident' &&
+                                <div>
+                                    <h1>{d.title}</h1>
+                                    <p>User: {d.userId}</p>
+                                    <p>Time of Post: {d.postTime}</p>
+                                    <p>Collision Type: {d.collisionType}</p>
+                                    <p>Pedestrians involved: {d.pedestriansInvolved}</p>
+                                    <p>Severity: {d.severity}</p>
+                                    <p>Anybody hurt?: {d.causedInjury ? 'Yes': 'No'}</p>
+                                </div>  
+                            }
+                            
+                            {d.eventType =='natural_disaster' &&
+                                <div>
+                                    <h1>{d.title}</h1>
+                                    <p>User: {d.userId}</p>
+                                    <p>Time of Post: {d.postTime}</p>
+                                    <p>Disaster type: {d.type}</p>
+                                    <p>Magnitude: {d.magnitude}</p>
+                                    <p>Severity: {d.severity}</p>
+                                    <p>Anybody hurt?: {d.causedInjury ? 'Yes': 'No'}</p>
+                                </div>
+                            }
 
+                        </ListGroupItem>
+                    )
+                })}
+                </ListGroup>
+                <div style = {{
+                    marginTop: '3%',
+                }}>
+                    <ListGroup variant = "flush" horizontal>
+                    {this.state.postsFound.map(function(d,idx) {
+                        return (
+                            <ListGroupItem key = {idx}>
+                                <div>
+                                    <h1>{d.communityName}</h1>
+                                    <p>Total # of Posts: {d.totalPosts}</p>
+                                </div>
+
+                            </ListGroupItem>
+                        )
+                    })}
+                    </ListGroup>
+                </div>
             </div>
         );
     }

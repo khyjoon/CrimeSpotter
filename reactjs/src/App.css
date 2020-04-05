@@ -40,6 +40,9 @@ h1 {
 
 p {
   margin-bottom: 15px;
+  margin: 0;
+  padding: 0;
+  line-height:1;
 }
 
 div {

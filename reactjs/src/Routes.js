@@ -5,7 +5,7 @@ import Login from './components/Login';
 import Community from './components/Community';
 import Register from './components/Register';
 import Main from './components/Main';
-import UserProfile from './components/UserProfile';
+import Namechange from './components/Namechange';
 
 class Routes extends Component {
     render() {
@@ -16,6 +16,7 @@ class Routes extends Component {
                 <Route path = "/community" component = {Community}/>
                 <Route path = "/register" component = {Register}/>
                 <Route path = "/main" component = {Main}/>
+                <Route path = "/namechange" component = {Namechange}/>
                 <Route component = {Error}/>                
               </Switch>
             </BrowserRouter>
