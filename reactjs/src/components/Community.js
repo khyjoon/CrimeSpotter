@@ -22,12 +22,6 @@ class Community extends Component {
             })
     }
 
-    // handleClick(event) {
-    //     event.preventDefault;
-    //     alert("clicked!");
-    //     this.props.history.push('/main');
-    // }
-
     render() {
         const history = this.props.history;
 
@@ -49,7 +43,6 @@ class Community extends Component {
                         return (<ListGroupItem onClick = {() => {
                             UserProfile.setCommunityID(d.communityId);
                             UserProfile.setCommunity(d.name);
-                            // alert(UserProfile.getCommunityID() + UserProfile.getCommunity());
                             history.push('/main');
                         }} key={idx}>{d.name}</ListGroupItem>)
                     })}

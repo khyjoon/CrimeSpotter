@@ -11,9 +11,7 @@ class Register extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        // TODO: PUT request for user data
         const data = new FormData(event.target);
-        // check all data and see it is correct
         axios.post('http://localhost:8080/users', null, {
             params: {
                 user_name: event.target.name.value,

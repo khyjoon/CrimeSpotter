@@ -19,18 +19,15 @@ class Main extends Component {
         posts: [],
         postsFound: [],
         postsTotal: [],
+        comments: [],
     };
 
     componentDidMount() {
         // get requests here
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(position => {
-                // this.setState({latitude: (position.coords.latitude).toFixed(3),
-                // longitude: (position.coords.longitude).toFixed(3)});
                 UserProfile.setLatitude((position.coords.latitude).toFixed(3));
                 UserProfile.setLongitude((position.coords.longitude).toFixed(3));
-                // console.log("Latitude is :", (position.coords.latitude).toFixed(3));
-                // console.log("Longitude is :", (position.coords.longitude).toFixed(3));
                 console.log("Latitude is :", UserProfile.getLatitude());
                 console.log("Longitude is :", UserProfile.getLongitude());
             });
@@ -272,6 +269,8 @@ class Main extends Component {
 
     render() {
         const history = this.props.history;
+        const curState = this.state;
+        const cur = this;
 
         return(
             <div style = {{
@@ -483,9 +482,23 @@ class Main extends Component {
                                                 user_id: d.userId,
                                             }
                                         }).then(res => {
-                                            alert("Username: " + res.data[0].userName + "\n" + "Email: " + res.data[0].email);
+                                            const userdata = res.data[0].userName;
+                                            const useremail = res.data[0].email;
+                                            axios.get('http://localhost:8080/post/comment', {
+                                                params: {
+                                                    post_id: d.postId,
+                                                }
+                                            }).then(res => {
+                                                if (!res.data.length) {
+                                                    alert("Username: " + userdata + "\n" + "Email: " + useremail)
+                                                }
+                                                else {
+                                                    alert("Username: " + userdata + "\n" + "Email: " + useremail + "\n"+ "Comment(Original Poster): " + res.data[0].content);
+                                                }
+                                            })
                                         })
                                     }}>Click for User Info</Button>
+
                                 </div>
                             }
                             
@@ -505,7 +518,20 @@ class Main extends Component {
                                                 user_id: d.userId,
                                             }
                                         }).then(res => {
-                                            alert("Username: " + res.data[0].userName + "\n" + "Email: " + res.data[0].email);
+                                            const userdata = res.data[0].userName;
+                                            const useremail = res.data[0].email;
+                                            axios.get('http://localhost:8080/post/comment', {
+                                                params: {
+                                                    post_id: d.postId,
+                                                }
+                                            }).then(res => {
+                                                if (!res.data.length) {
+                                                    alert("Username: " + userdata + "\n" + "Email: " + useremail)
+                                                }
+                                                else {
+                                                    alert("Username: " + userdata + "\n" + "Email: " + useremail + "\n"+ "Comment(Original Poster): " + res.data[0].content);
+                                                }
+                                            })
                                         })
                                     }}>Click for User Info</Button>
                                 </div>  
@@ -526,7 +552,20 @@ class Main extends Component {
                                                 user_id: d.userId,
                                             }
                                         }).then(res => {
-                                            alert("Username: " + res.data[0].userName + "\n" + "Email: " + res.data[0].email);
+                                            const userdata = res.data[0].userName;
+                                            const useremail = res.data[0].email;
+                                            axios.get('http://localhost:8080/post/comment', {
+                                                params: {
+                                                    post_id: d.postId,
+                                                }
+                                            }).then(res => {
+                                                if (!res.data.length) {
+                                                    alert("Username: " + userdata + "\n" + "Email: " + useremail)
+                                                }
+                                                else {
+                                                    alert("Username: " + userdata + "\n" + "Email: " + useremail + "\n"+ "Comment(Original Poster): " + res.data[0].content);
+                                                }
+                                            })
                                         })
                                     }}>Click for User Info</Button>
                                 </div>
