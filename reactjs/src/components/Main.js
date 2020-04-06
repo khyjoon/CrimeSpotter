@@ -18,8 +18,7 @@ class Main extends Component {
     state = {
         posts: [],
         postsFound: [],
-        // latitude: null,
-        // longitude: null,
+        postsTotal: [],
     };
 
     componentDidMount() {
@@ -54,6 +53,11 @@ class Main extends Component {
         axios.get("http://localhost:8080/post/communitytotal")
         .then(res => {
             this.setState({postsFound: res.data});
+        })
+
+        axios.get("http://localhost:8080/post/total")
+        .then(res => {
+            this.setState({postsTotal: res.data});
         })
 
     }
@@ -496,12 +500,17 @@ class Main extends Component {
                                     <h1>{d.communityName}</h1>
                                     <p>Total # of Posts: {d.totalPosts}</p>
                                 </div>
-
                             </ListGroupItem>
                         )
                     })}
                     </ListGroup>
                 </div>
+                <div style = {{
+                    marginTop: '3%',
+                }}>
+                    <h1>Total number of Posts: {this.state.postsTotal} </h1>
+                </div>
+
             </div>
         );
     }

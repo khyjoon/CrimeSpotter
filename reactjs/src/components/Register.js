@@ -24,15 +24,12 @@ class Register extends Component {
         }).then(res => {
             console.log(res);
             console.log(res.data);
-        }).catch(err => console.log(err))
-
-        let noduplicateaccount = 1;
-        if (noduplicateaccount) {
             this.props.history.push('/');
-        }
-        else {
-            alert('Account already exists!');
-        }
+        }).catch(err => {
+            console.log(err)
+            alert("Enter a unique account name or email!")
+            window.location.reload(false);
+        })
     }
 
     render() {
