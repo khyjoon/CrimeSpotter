@@ -51,7 +51,7 @@ public class UserRepositoryImpl implements UserRepository {
         String updateQuery = "UPDATE User\n" +
                                     "SET user_name = ?\n" +
                                         "WHERE user_name = ?;";
-        jdbcTemplate.update(updateQuery, currUsername, newUsername);
+        jdbcTemplate.update(updateQuery, newUsername, currUsername);
         return getUserByUserName(newUsername);
     }
 
