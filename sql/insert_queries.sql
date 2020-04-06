@@ -23,7 +23,7 @@ INSERT INTO Community (c_name) VALUES
  ('Vancouver'),
  ('Calgary'),
  ('Edmonton'),
- ('Toronto',
+ ('Toronto'),
  ('Montreal');
 
 #add users to communities

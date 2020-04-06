@@ -73,8 +73,12 @@ CREATE TABLE IF NOT EXISTS Post(
     event_id CHAR(36) NOT NULL,
     post_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     isActive BIT,
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (event_id) REFERENCES Event(event_id),
+    FOREIGN KEY (user_id) 
+        REFERENCES User(user_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (event_id) 
+        REFERENCES Event(event_id)
+        ON DELETE CASCADE,
     UNIQUE (post_time)
 );
 
