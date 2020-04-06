@@ -30,6 +30,11 @@ public class PostController {
         return postService.addCommentOnPost(userId, postId, comment);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/post/comment")
+    public List<Comment> addCommentToPost(@RequestParam("post_id") String postId) {
+        return postService.getCommentByPostId(postId);
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/post")
     public List<PostEvent> getPostInfo(@RequestParam(value="post_id", required=false) String postId,

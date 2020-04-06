@@ -51,6 +51,16 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
+    public List<Comment> getCommentsByPostId(String postId) {
+        String readQuery =
+                "SELECT *\n" +
+                        "FROM UserPostComment\n" +
+                        "WHERE post_id = ?";
+        List<Comment> comment = jdbcTemplate.query(readQuery, new CommentMapper(), postId);
+        return comment;
+    }
+
+    @Override
     public List<PostEvent> getAllPosts() {
         String readQuery =
                 "SELECT post_id\n" +

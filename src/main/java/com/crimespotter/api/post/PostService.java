@@ -31,6 +31,10 @@ public class PostService {
         return postRepository.addCommentOnPost(comment_id, user_id, post_id, content);
     }
 
+    public List<Comment> getCommentByPostId(String postId) {
+        return postRepository.getCommentsByPostId(postId);
+    }
+
     public List<PostEvent> getAllPosts() {
         return postRepository.getAllPosts();
     }
