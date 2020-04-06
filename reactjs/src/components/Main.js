@@ -106,8 +106,18 @@ class Main extends Component {
                     }
                 }).then(res => {
                     console.log(res.data);
-                    window.location.reload(false);
-
+                    const postid = res.data;
+                    // Create comment
+                    axios.post('http://localhost:8080/post/comment', null, {
+                        params: {
+                            post_id: postid,
+                            user_id: UserProfile.getID(),
+                            comment: form.comment.value
+                        }
+                    }).then(res => {
+                        console.log(res.data);
+                        window.location.reload(false);
+                    }).catch(err => console.log(err))
                 }).catch(err => console.log(err))
             }).catch(err => console.log(err))
         }).catch(err => console.log(err))
@@ -155,7 +165,18 @@ class Main extends Component {
                     }
                 }).then(res => {
                     console.log(res.data);
-                    window.location.reload(false);
+                    const postid = res.data;
+                    // Create comment
+                    axios.post('http://localhost:8080/post/comment', null, {
+                        params: {
+                            post_id: postid,
+                            user_id: UserProfile.getID(),
+                            comment: form.comment.value
+                        }
+                    }).then(res => {
+                        console.log(res.data);
+                        window.location.reload(false);
+                    }).catch(err => console.log(err))
                 }).catch(err => console.log(err))
             }).catch(err => console.log(err))
         }).catch(err => console.log(err))       
@@ -205,8 +226,18 @@ class Main extends Component {
                     }
                 }).then(res => {
                     console.log(res.data);
-                    window.location.reload(false);
-
+                    const postid = res.data;
+                    // Create comment
+                    axios.post('http://localhost:8080/post/comment', null, {
+                        params: {
+                            post_id: postid,
+                            user_id: UserProfile.getID(),
+                            comment: form.comment.value
+                        }
+                    }).then(res => {
+                        console.log(res.data);
+                        window.location.reload(false);
+                    }).catch(err => console.log(err))
                 }).catch(err => console.log(err))
             }).catch(err => console.log(err))
         }).catch(err => console.log(err))
@@ -284,6 +315,10 @@ class Main extends Component {
                                     <p> Title of Post: 
                                         <input id = "title" type = "text" placeholder = "Enter Post Title here"/> 
                                     </p>
+                                    <div>
+                                    <p> Comment: </p>
+                                        <textarea id = "comment" type = "text" placeholder = "Enter Comment here"/>
+                                    </div>
                                     <p> Severity (Out of 10):  
                                         <input id="severity" type = "number" pattern='[0-9]' placeholder = "How severe is the crime?"/>
                                     </p>
@@ -329,6 +364,10 @@ class Main extends Component {
                                     <p> Title of Post: 
                                         <input id = "title" type = "text" placeholder = "Enter Post Title here"/> 
                                     </p>
+                                    <div>
+                                    <p> Comment: </p>
+                                        <textarea id = "comment" type = "text" placeholder = "Enter Comment here"/>
+                                    </div>
                                     <p>Severity (Out of 10):  
                                         <input id="severity" type = "number" pattern='[0-9]' placeholder = "How severe is the accident?"/>
                                     </p>
@@ -371,6 +410,10 @@ class Main extends Component {
                                     <p> Title of Post: 
                                         <input id = "title" type = "text" placeholder = "Enter Post Title here"/> 
                                     </p>
+                                    <div>
+                                        <p> Comment: </p>
+                                        <textarea id = "comment" type = "text" placeholder = "Enter Comment here"/>
+                                    </div>
                                     <p>Severity (Out of 10):  
                                         <input id="severity" type = "number" pattern='[0-9]' placeholder = "How severe is the accident?"/>
                                     </p>
