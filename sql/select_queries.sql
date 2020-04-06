@@ -36,6 +36,11 @@ SELECT comment_id
 FROM UserPostComment
 WHERE comment_id = <"community_id">;
 
+#
+SELECT *
+FROM UserPostComment
+WHERE post_id = <"post_id">;
+
 #get all posts
 SELECT post_id
 FROM Post;
@@ -66,6 +71,27 @@ JOIN Event e ON e.event_id = p.event_id
 JOIN NaturalDisaster nd ON nd.event_id = p.event_id
 WHERE p.post_id IN <"post_id">;
 
+#get Post Info By CommunityId(crime)
+SELECT *
+FROM Post p
+JOIN Event e ON e.event_id = p.event_id
+JOIN Crime c ON c.event_id = p.event_id
+WHERE e.c_id IN c_id;
+
+#get Post Info By CommunityId(car accident)
+SELECT *
+FROM Post p
+JOIN Event e ON e.event_id = p.event_id
+JOIN CarAccident ca ON ca.event_id = p.event_id
+WHERE e.c_id IN c_id;
+
+#get Post Info By CommunityId(natural disaster)
+SELECT *
+FROM Post p
+JOIN Event e ON e.event_id = p.event_id
+JOIN NaturalDisaster nd ON nd.event_id = p.event_id
+WHERE e.c_id IN c_id;
+
 #get total number of posts (Aggregation)
 SELECT COUNT(post_id)
 FROM Post;
@@ -84,6 +110,12 @@ ORDER BY COUNT(post_id) DESC;
 SELECT *
 FROM Location
 WHERE location_id = <"location_id">;
+
+#getLocationByCoordinates
+SELECT *
+FROM Location
+WHERE latitude = ? AND longitude = ?;
+
 
 #car accident events
 SELECT *
