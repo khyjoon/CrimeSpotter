@@ -32,6 +32,11 @@ class Register extends Component {
         })
     }
 
+
+    goBack = () => {
+        this.props.history.push('/');
+    }
+
     render() {
         return (
             <div style = {{
@@ -59,6 +64,11 @@ class Register extends Component {
                     </p>
                     <Button variant = "primary" type = "submit" active>
                         Submit!
+                    </Button>
+                    <Button style={{
+                            marginLeft:15,
+                        }} variant="secondary" onClick = {this.goBack} active>
+                            Back to Login
                     </Button>
                 </form>
             </div>

@@ -13,20 +13,12 @@ class Login extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
-    // handleChange = event => {
-    //     this.setState({ name: event.target.value, password: event.target.value});
-    // }
-
     componentDidMount() {
 
     }
 
     handleSubmit = event => {
         event.preventDefault();
-        // TODO: retrieve login and password via HTTP request here;
-        // if valid:
-        // NOTE: when i implement axios.get, we will use the username/userid/useremail from the http response
         
         axios.get('http://localhost:8080/users', {
             params: {

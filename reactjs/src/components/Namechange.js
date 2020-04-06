@@ -27,6 +27,10 @@ class Namechange extends Component {
         this.props.history.push('/main');
     }
 
+    goBack = () => {
+        this.props.history.push('/main');
+    }
+
     render() {
         return (
             <div style = {{
@@ -51,6 +55,11 @@ class Namechange extends Component {
                     </p>
                     <Button variant = "primary" type = "submit" active>
                         Submit!
+                    </Button>
+                    <Button style={{
+                            marginLeft:15,
+                        }} variant="secondary" onClick = {this.goBack} active>
+                            Back to Main
                     </Button>
                 </form>
             </div>

@@ -225,8 +225,12 @@ class Main extends Component {
             params: {
                 userId: UserProfile.getID(),
             }
+        }).then(res => {
+            alert("Successfully deleted your account!")
+            this.props.history.push('/');
+        }).catch(err => {
+            alert("Failed to delete user");
         })
-        this.props.history.push('/');
     }
 
     logOut = () => {
